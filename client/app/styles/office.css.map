@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAGI,mCAAiB;EACf,YAAY,EAAE,IAAI;EAClB,sCAAG;IACD,KAAK,EAAE,IAAI;AAKjB,4BAAgB;EACd,QAAQ,EAAE,MAAM",
+"sources": ["office.scss"],
+"names": [],
+"file": "office.css"
+}

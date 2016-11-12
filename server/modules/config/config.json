@@ -1,0 +1,15 @@
+{
+  "port": 3000,
+  "mongoose":{
+    "uri": "mongodb://localhost/site"
+  },
+  "session":{
+    "secret": "secret",
+    "key": "sid",
+    "cookie": {
+      "path":"/",
+      "httpOnly": true,
+      "maxAge": 12000000
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.office-page {
+
+  .navbar {
+    &.navbar-default {
+      margin-right: 30px;
+      li {
+        float: none;
+      }
+    }
+  }
+
+  .office-content {
+    overflow: hidden;
+  }
+}

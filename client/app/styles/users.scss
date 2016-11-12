@@ -1,0 +1,10 @@
+.users-table {
+  min-height: 343px;
+
+  .owner-row {
+    background-color: #ccc;
+    &:hover {
+      background-color: #ccc;
+    }
+  }
+}
