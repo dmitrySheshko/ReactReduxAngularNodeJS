@@ -6,7 +6,7 @@ import { isEmpty } from 'lodash';
 import { getUser } from '../../actions/user-actions';
 import { startCall, setRemoteCallUser } from '../../actions/call-actions';
 
-import { START_CALL } from '../../../common/constants/const';
+import { OUTGOING_CALL } from '../../../common/constants/const';
 
 class User extends React.Component {
 
@@ -20,6 +20,7 @@ class User extends React.Component {
         this.checkRegistration = this.checkRegistration.bind(this);
         this.checkOnline = this.checkOnline.bind(this);
         this.sendStartCall = this.sendStartCall.bind(this);
+        this.checkOtherCall = this.checkOtherCall.bind(this);
     }
 
     initState(){
@@ -43,7 +44,7 @@ class User extends React.Component {
     }
 
     call(){
-        if(this.checkRegistration() && this.checkOnline()){
+        if(this.checkIsOwner() && this.checkOtherCall() && this.checkRegistration() && this.checkOnline()){
             this.props.setRemoteCallUser(this.props.user);
             this.props.startCall();
             this.sendStartCall();
@@ -53,12 +54,12 @@ class User extends React.Component {
     sendStartCall(){
         if(this.props.sendMessage) {
             this.props.sendMessage({
-                type: START_CALL,
+                type: OUTGOING_CALL,
                 params: {
-                    ingoingUser: {
-                        id: this.props.owner.id,
+                    caller: {
                         name: this.props.owner.name
-                    }
+                    },
+                    receiver: this.props.user.id
                 }
             });
         }
@@ -80,6 +81,14 @@ class User extends React.Component {
             return false;
         }
         return true;
+    }
+
+    checkIsOwner(){
+        return this.props.owner.id !== this.props.user.id;
+    }
+
+    checkOtherCall(){
+        return !this.props.call.outgoingCall && !this.props.call.ingoingCall && !this.props.call.startCall;
     }
 
     sendMessage(){
@@ -167,7 +176,8 @@ function mapStateToProps(state){
     return {
         user: state.user.user,
         owner: state.owner.owner,
-        sendMessage: state.owner.ws.sendMessage
+        sendMessage: state.owner.ws.sendMessage,
+        call: state.call
     }
 }
 

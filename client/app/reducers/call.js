@@ -1,22 +1,28 @@
-import { START_CALL, END_CALL, SET_REMOTE_CALL_USER, REMOVE_REMOTE_CALL_USER } from '../../common/constants/const';
+import { OUTGOING_CALL, END_CALL, SET_RECEIVER, REMOVE_RECEIVER, INGOING_CALL } from '../../common/constants/const';
 
 const initialState = {
     outgoingCall: false,
     ingoingCall: false,
     startCall: false,
-    remoteUser: {}
+    receiver: {},
+    caller: {},
+    audioAccess: true,
+    videoAccess: true,
+    audioStream: null,
+    videoStream: null
 };
 
 const ownerReducer = function(state = initialState, action){
     switch (action.type){
-        case SET_REMOTE_CALL_USER:
-            return { ...state, remoteUser: action.user };
-        case REMOVE_REMOTE_CALL_USER:
-            return { ...state, remoteUser: {} };
-        case START_CALL:
+        case SET_RECEIVER:
+            return { ...state, receiver: action.user };
+        case OUTGOING_CALL:
             return { ...state, outgoingCall: true };
         case END_CALL:
-            return { ...state, outgoingCall: false };
+            //TODO: remove streams
+            return { ...state, outgoingCall: false, ingoingCall: false, startCall: false, receiver: {}, caller: {} };
+        case INGOING_CALL:
+            return { ...state, ingoingCall: true, caller: action.caller };
         default :
             return state;
     }

@@ -1,26 +1,27 @@
-import { START_CALL, END_CALL, SET_REMOTE_CALL_USER, REMOVE_REMOTE_CALL_USER } from '../../common/constants/const';
+import { OUTGOING_CALL, END_CALL, SET_RECEIVER, REMOVE_RECEIVER, INGOING_CALL } from '../../common/constants/const';
 
 export function setRemoteCallUser(user){
     return {
-        type: SET_REMOTE_CALL_USER,
+        type: SET_RECEIVER,
         user
-    }
-}
-
-export function removeRemoteCallUser(){
-    return {
-        type: REMOVE_REMOTE_CALL_USER
     }
 }
 
 export function startCall(){
     return {
-        type: START_CALL
+        type: OUTGOING_CALL
     }
 }
 
 export function endCall(){
     return {
         type: END_CALL
+    }
+}
+
+export function setIngoingCall(caller){
+    return {
+        type: INGOING_CALL,
+        caller
     }
 }

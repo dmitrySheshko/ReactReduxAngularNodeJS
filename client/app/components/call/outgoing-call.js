@@ -12,7 +12,7 @@ class OutgoingCall extends React.Component {
 
     endCall(){
         this.props.actions.endCall();
-        this.props.actions.removeRemoteCallUser();
+        //this.props.actions.removeReceiver();
         this.sendEndCall();
     }
 
@@ -21,9 +21,7 @@ class OutgoingCall extends React.Component {
             this.props.actions.sendMessage({
                 type: END_CALL,
                 params: {
-                    ingoingUser: {
-                        id: this.props.ownerId
-                    }
+                    receiver: this.props.receiver.id
                 }
             });
         }
@@ -37,7 +35,7 @@ class OutgoingCall extends React.Component {
                     <i className='glyphicon glyphicon-remove'></i>
                 </a>
                 <div className='block'>
-                    <div className='user'>{ this.props.remoteUser.name }</div>
+                    <div className='user'>{ this.props.receiver.name }</div>
                     <div className='buttons'>
                         <a href='javascript:void(0)' className='btn-audio'>
                             <i className='glyphicon glyphicon-volume-down'></i>
@@ -45,7 +43,7 @@ class OutgoingCall extends React.Component {
                         <a href='javascript:void(0)' className='btn-video'>
                             <i className='glyphicon glyphicon-facetime-video'></i>
                         </a>
-                        <a href='javascript:void(0)' className='btn-reject'>
+                        <a href='javascript:void(0)' className='btn-reject' onClick={ this.endCall }>
                             <i className='glyphicon glyphicon-ban-circle'></i>
                         </a>
                     </div>

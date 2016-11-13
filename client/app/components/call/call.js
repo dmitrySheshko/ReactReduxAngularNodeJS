@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { endCall, removeRemoteCallUser } from '../../actions/call-actions';
+import { endCall } from '../../actions/call-actions';
 
 import IngoingCall from './ingoing-call';
 import OutgoingCall from './outgoing-call';
@@ -11,8 +11,8 @@ class Call extends React.Component {
     render(){
         return(
             <div className='call-component'>
-                { (this.props.call.outgoingCall) ? <OutgoingCall actions={ { endCall: this.props.endCall, removeRemoteCallUser: this.props.removeRemoteCallUser, sendMessage: this.props.sendMessage } } remoteUser={ this.props.call.remoteUser } ownerId={ this.props.ownerId } /> : null }
-                { (this.props.call.ingoingCall) ? <IngoingCall /> : null }
+                { (this.props.call.outgoingCall) ? <OutgoingCall actions={ { endCall: this.props.endCall, sendMessage: this.props.sendMessage } } receiver={ this.props.call.receiver } ownerId={ this.props.ownerId } /> : null }
+                { (this.props.call.ingoingCall) ? <IngoingCall actions={ { endCall: this.props.endCall, sendMessage: this.props.sendMessage } } caller={ this.props.call.caller } /> : null }
                 { (this.props.call.startCall) ? <VideoCall /> : null }
             </div>
         );
@@ -27,4 +27,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, { endCall, removeRemoteCallUser })(Call);
+export default connect(mapStateToProps, { endCall })(Call);

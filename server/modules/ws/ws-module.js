@@ -58,6 +58,12 @@ class WsModule{
         }
     }
 
+    findUserById(id){
+        return this.users.find(user => {
+            return user.id === id;
+        });
+    }
+
     removeUser(userId){
         this.users = this.users.filter(user => {
             return user.id !== userId;

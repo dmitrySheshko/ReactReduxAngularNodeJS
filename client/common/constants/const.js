@@ -12,7 +12,10 @@ export const REMOVE_WS = 'REMOVE_WS';
 
 export const ONLINE_STATUS = 'ONLINE_STATUS';
 
-export const SET_REMOTE_CALL_USER = 'SET_REMOTE_CALL_USER';
-export const REMOVE_REMOTE_CALL_USER = 'REMOVE_REMOTE_CALL_USER';
-export const START_CALL = 'START_CALL';
+export const SET_RECEIVER = 'SET_RECEIVER';
+export const REMOVE_RECEIVER = 'REMOVE_RECEIVER';
+export const OUTGOING_CALL = 'OUTGOING_CALL';
+export const INGOING_CALL = 'INGOING_CALL';
 export const END_CALL = 'END_CALL';
+export const RECEIVER_OFFLINE = 'RECEIVER_OFFLINE';
+export const REJECT_CALL = 'REJECT_CALL';
