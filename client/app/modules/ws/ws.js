@@ -43,6 +43,10 @@ export default class WS {
             case constants.REJECT_CALL:
                 this.dispatch(endCall());
                 break;
+            case constants.ACCEPT_CALL:
+                //start offer
+                //this.dispatch(endCall());
+                break;
             default :
                 break;
         }

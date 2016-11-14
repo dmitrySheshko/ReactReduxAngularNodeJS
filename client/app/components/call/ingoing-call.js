@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { REJECT_CALL } from '../../../common/constants/const';
+import { REJECT_CALL, ACCEPT_CALL } from '../../../common/constants/const';
 
 class IngoingCall extends React.Component {
 
@@ -8,7 +8,9 @@ class IngoingCall extends React.Component {
         super(props);
         this.rejectCall = this.rejectCall.bind(this);
         this.acceptCall = this.acceptCall.bind(this);
+        this.acceptAudioCall = this.acceptAudioCall.bind(this);
         this.sendRejectMessage = this.sendRejectMessage.bind(this);
+        this.sendAccessMessage = this.sendAccessMessage.bind(this);
     }
 
     rejectCall(){
@@ -17,11 +19,13 @@ class IngoingCall extends React.Component {
     }
 
     acceptAudioCall(){
-
+        this.props.actions.changeVideoAccess();
+        this.acceptCall();
     }
 
     acceptCall(){
-
+        this.props.actions.startCall();
+        this.sendAccessMessage();
     }
 
     sendRejectMessage(){
@@ -33,6 +37,15 @@ class IngoingCall extends React.Component {
                 }
             });
         }
+    }
+
+    sendAccessMessage(){
+        this.props.actions.sendMessage({
+            type: ACCEPT_CALL,
+            params: {
+                receiver: this.props.caller.id
+            }
+        });
     }
 
     render(){
@@ -49,9 +62,9 @@ class IngoingCall extends React.Component {
                     <div className='user'>{ caller.name }</div>
                     <div className='buttons'>
                         <a href='javascript:void(0)' className='btn-audio' onClick={ this.acceptAudioCall }>
-                            <i className='glyphicon glyphicon-volume-down' onClick={ this.acceptCall }></i>
+                            <i className='glyphicon glyphicon-volume-down'></i>
                         </a>
-                        <a href='javascript:void(0)' className='btn-video'>
+                        <a href='javascript:void(0)' className='btn-video' onClick={ this.acceptCall }>
                             <i className='glyphicon glyphicon-facetime-video'></i>
                         </a>
                         <a href='javascript:void(0)' className='btn-reject' onClick={ this.rejectCall }>

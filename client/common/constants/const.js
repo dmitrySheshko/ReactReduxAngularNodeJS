@@ -19,3 +19,12 @@ export const INGOING_CALL = 'INGOING_CALL';
 export const END_CALL = 'END_CALL';
 export const RECEIVER_OFFLINE = 'RECEIVER_OFFLINE';
 export const REJECT_CALL = 'REJECT_CALL';
+export const ACCEPT_CALL = 'ACCEPT_CALL';
+
+export const VIDEO_ACCESS = 'VIDEO_ACCESS';
+export const AUDIO_ACCESS = 'AUDIO_ACCESS';
+export const START_CALL = 'START_CALL';
+
+export const ON_OFFER = 'ON_OFFER';
+export const ON_ANSWER = 'ON_ANSWER';
+export const ON_ICE = 'ON_ICE';

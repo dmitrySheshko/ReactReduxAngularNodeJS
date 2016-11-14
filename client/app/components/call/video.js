@@ -1,6 +1,26 @@
 import React from 'react';
 
 class VideoCall extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.endCall = this.endCall.bind(this);
+        this.changeVideoAccess = this.changeVideoAccess.bind(this);
+        this.changeAudioAccess = this.changeAudioAccess.bind(this);
+    }
+
+    endCall(){
+        this.props.actions.endCall();
+    }
+
+    changeVideoAccess(){
+        this.props.actions.changeVideoAccess();
+    }
+
+    changeAudioAccess(){
+        this.props.actions.changeAudioAccess();
+    }
+
     render(){
         return (
             <div className='video-call'>
@@ -14,13 +34,13 @@ class VideoCall extends React.Component {
                     </div>
                 </div>
                 <div className='buttons'>
-                    <a href='javascript:void(0)' className='btn-audio'>
+                    <a href='javascript:void(0)' className='btn-audio' onClick={ this.changeAudioAccess }>
                         <i className='glyphicon glyphicon-volume-down'></i>
                     </a>
-                    <a href='javascript:void(0)' className='btn-video'>
+                    <a href='javascript:void(0)' className='btn-video' onClick={ this.changeVideoAccess }>
                         <i className='glyphicon glyphicon-facetime-video'></i>
                     </a>
-                    <a href='javascript:void(0)' className='btn-reject'>
+                    <a href='javascript:void(0)' className='btn-reject' onClick={ this.endCall }>
                         <i className='glyphicon glyphicon-ban-circle'></i>
                     </a>
                 </div>

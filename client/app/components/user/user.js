@@ -4,7 +4,7 @@ import { Table, Modal } from 'react-bootstrap';
 import { isEmpty } from 'lodash';
 
 import { getUser } from '../../actions/user-actions';
-import { startCall, setRemoteCallUser } from '../../actions/call-actions';
+import { outgoingCall, setRemoteCallUser } from '../../actions/call-actions';
 
 import { OUTGOING_CALL } from '../../../common/constants/const';
 
@@ -19,7 +19,7 @@ class User extends React.Component {
         this.sendMessage = this.sendMessage.bind(this);
         this.checkRegistration = this.checkRegistration.bind(this);
         this.checkOnline = this.checkOnline.bind(this);
-        this.sendStartCall = this.sendStartCall.bind(this);
+        this.sendOutgoingCall = this.sendOutgoingCall.bind(this);
         this.checkOtherCall = this.checkOtherCall.bind(this);
     }
 
@@ -46,12 +46,12 @@ class User extends React.Component {
     call(){
         if(this.checkIsOwner() && this.checkOtherCall() && this.checkRegistration() && this.checkOnline()){
             this.props.setRemoteCallUser(this.props.user);
-            this.props.startCall();
-            this.sendStartCall();
+            this.props.outgoingCall();
+            this.sendOutgoingCall();
         }
     }
 
-    sendStartCall(){
+    sendOutgoingCall(){
         if(this.props.sendMessage) {
             this.props.sendMessage({
                 type: OUTGOING_CALL,
@@ -181,4 +181,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, { getUser, startCall, setRemoteCallUser })(User);
+export default connect(mapStateToProps, { getUser, outgoingCall, setRemoteCallUser })(User);

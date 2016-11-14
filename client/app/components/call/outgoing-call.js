@@ -12,7 +12,6 @@ class OutgoingCall extends React.Component {
 
     endCall(){
         this.props.actions.endCall();
-        //this.props.actions.removeReceiver();
         this.sendEndCall();
     }
 

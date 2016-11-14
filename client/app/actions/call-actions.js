@@ -1,4 +1,4 @@
-import { OUTGOING_CALL, END_CALL, SET_RECEIVER, REMOVE_RECEIVER, INGOING_CALL } from '../../common/constants/const';
+import { OUTGOING_CALL, END_CALL, SET_RECEIVER, REMOVE_RECEIVER, INGOING_CALL, VIDEO_ACCESS, AUDIO_ACCESS, START_CALL } from '../../common/constants/const';
 
 export function setRemoteCallUser(user){
     return {
@@ -7,7 +7,7 @@ export function setRemoteCallUser(user){
     }
 }
 
-export function startCall(){
+export function outgoingCall(){
     return {
         type: OUTGOING_CALL
     }
@@ -23,5 +23,23 @@ export function setIngoingCall(caller){
     return {
         type: INGOING_CALL,
         caller
+    }
+}
+
+export function changeVideoAccess(){
+    return {
+        type: VIDEO_ACCESS
+    }
+}
+
+export function changeAudioAccess(){
+    return {
+        type: AUDIO_ACCESS
+    }
+}
+
+export function startCall(){
+    return {
+        type: START_CALL
     }
 }
