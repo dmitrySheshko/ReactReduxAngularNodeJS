@@ -1,6 +1,6 @@
 import WsModule from '../../modules/ws/ws-module';
 import { messageChangeOnlineStatus } from '../../../client/common/messages/messages';
-import { OUTGOING_CALL, INGOING_CALL, RECEIVER_OFFLINE, END_CALL, REJECT_CALL, ACCEPT_CALL } from '../../../client/common/constants/const';
+import { OUTGOING_CALL, INGOING_CALL, RECEIVER_OFFLINE, END_CALL, REJECT_CALL, ACCEPT_CALL, OFFER, ANSWER, ICE } from '../../../client/common/constants/const';
 
 export default class UserServerModel {
     constructor(user){
@@ -80,6 +80,24 @@ export default class UserServerModel {
                     remoteUser.sendMessage({
                         type: ACCEPT_CALL
                     });
+                }
+                break;
+            case OFFER:
+                remoteUser = this.getReceiver(message.params.receiver);
+                if(remoteUser){
+                    remoteUser.sendMessage(message);
+                }
+                break;
+            case ANSWER:
+                remoteUser = this.getReceiver(message.params.receiver);
+                if(remoteUser){
+                    remoteUser.sendMessage(message);
+                }
+                break;
+            case ICE:
+                remoteUser = this.getReceiver(message.params.receiver);
+                if(remoteUser){
+                    remoteUser.sendMessage(message);
                 }
                 break;
             default :

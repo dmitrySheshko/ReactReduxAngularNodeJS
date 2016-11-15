@@ -24,7 +24,13 @@ export const ACCEPT_CALL = 'ACCEPT_CALL';
 export const VIDEO_ACCESS = 'VIDEO_ACCESS';
 export const AUDIO_ACCESS = 'AUDIO_ACCESS';
 export const START_CALL = 'START_CALL';
+export const ACCEPT_INGOING_CALL = 'ACCEPT_INGOING_CALL';
 
-export const ON_OFFER = 'ON_OFFER';
-export const ON_ANSWER = 'ON_ANSWER';
-export const ON_ICE = 'ON_ICE';
+export const OFFER = 'OFFER';
+export const ANSWER = 'ANSWER';
+export const ICE = 'ICE';
+export const SET_CREATE_OFFER = 'SET_CREATE_OFFER';
+export const SET_ON_ICE = 'SET_ON_ICE';
+export const SET_CREATE_ANSWER = 'SET_CREATE_ANSWER';
+export const CREATE_ANSWER = 'CREATE_ANSWER';
+export const SET_ON_ANSWER = 'SET_ON_ANSWER';

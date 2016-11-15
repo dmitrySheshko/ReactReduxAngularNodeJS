@@ -1,7 +1,7 @@
 import * as constants from '../../../common/constants/const';
 import { usersChangeOnline } from '../../actions/users-actions';
 import { userChangeOnline } from '../../actions/user-actions';
-import { setIngoingCall, endCall } from '../../actions/call-actions';
+import { setIngoingCall, endCall, startCall, createAnswer, onAnswer, onIce } from '../../actions/call-actions';
 
 export default class WS {
     constructor(dispatch){
@@ -44,8 +44,16 @@ export default class WS {
                 this.dispatch(endCall());
                 break;
             case constants.ACCEPT_CALL:
-                //start offer
-                //this.dispatch(endCall());
+                this.dispatch(startCall());
+                break;
+            case constants.OFFER:
+                this.dispatch(createAnswer(message.params.offer));
+                break;
+            case constants.ANSWER:
+                this.dispatch(onAnswer(message.params.answer));
+                break;
+            case constants.ICE:
+                this.dispatch(onIce(message.params.ice));
                 break;
             default :
                 break;
