@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { END_CALL, ICE, OFFER } from '../../../common/constants/const';
+import { END_CALL, ICE, OFFER, LOCAL_STREAM, REMOTE_STREAM } from '../../../common/constants/const';
 
 class OutgoingCall extends React.Component {
 
@@ -26,6 +26,7 @@ class OutgoingCall extends React.Component {
         this.gotOfferLocalDescription = this.gotOfferLocalDescription.bind(this);
         this.onAnswer = this.onAnswer.bind(this);
         this.onIce = this.onIce.bind(this);
+        this.setStream = this.setStream.bind(this);
     }
 
     componentWillMount(){
@@ -50,12 +51,18 @@ class OutgoingCall extends React.Component {
         }
     }
 
+    setStream(streamType, stream){
+        this.props.actions.setStream(streamType, stream);
+    }
+
     initWebRTC(){
         this.PeerConnection = window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
         this.IceCandidate = window.mozRTCIceCandidate || window.RTCIceCandidate;
         this.SessionDescription = window.mozRTCSessionDescription || window.RTCSessionDescription;
         navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia || navigator.webkitGetUserMedia;
     };
+
+
 
     static getUserMedia(successCallback, errorCallback){
         navigator.getUserMedia(
@@ -71,8 +78,7 @@ class OutgoingCall extends React.Component {
     }
 
     offerSuccessCallback(stream){
-        //TODO set local stream
-        //this.localStream = stream;
+        this.setStream(LOCAL_STREAM, stream);
         document.getElementById("local-video").src = URL.createObjectURL(stream);
         this.pc = new this.PeerConnection(this.PC_CONFIG);
         this.pc.addStream(stream);
@@ -96,8 +102,7 @@ class OutgoingCall extends React.Component {
     }
 
     gotRemoteStream(event){
-        //TODO set remote stream
-        //this.remoteStream = event.stream;
+        this.setStream(REMOTE_STREAM, event.stream);
         document.getElementById("remote-video").src = URL.createObjectURL(event.stream);
     }
 

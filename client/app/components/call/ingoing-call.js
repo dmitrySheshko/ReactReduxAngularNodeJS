@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { REJECT_CALL, ACCEPT_CALL, ANSWER, ICE } from '../../../common/constants/const';
+import { REJECT_CALL, ACCEPT_CALL, ANSWER, ICE, LOCAL_STREAM, REMOTE_STREAM } from '../../../common/constants/const';
 
 class IngoingCall extends React.Component {
 
@@ -27,6 +27,7 @@ class IngoingCall extends React.Component {
         this.sendAnswer = this.sendAnswer.bind(this);
         this.gotAnswerLocalDescription = this.gotAnswerLocalDescription.bind(this);
         this.errorCallback = this.errorCallback.bind(this);
+        this.setStream = this.setStream.bind(this);
     }
 
     componentWillMount(){
@@ -70,6 +71,10 @@ class IngoingCall extends React.Component {
         });
     }
 
+    setStream(streamType, stream){
+        this.props.actions.setStream(streamType, stream);
+    }
+
     //--------------------------------
     initWebRTC(){
         this.PeerConnection = window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
@@ -94,8 +99,7 @@ class IngoingCall extends React.Component {
     }
 
     answerSuccessCallback(stream, offer){
-        //TODO: save local stream
-        //this.localStream = stream;
+        this.setStream(LOCAL_STREAM, stream);
         document.getElementById("local-video").src = URL.createObjectURL(stream);
         this.pc = new this.PeerConnection(this.PC_CONFIG);
         this.pc.addStream(stream);
@@ -122,8 +126,7 @@ class IngoingCall extends React.Component {
     }
 
     gotRemoteStream(event){
-        //TODO set remote stream
-        //this.remoteStream = event.stream;
+        this.setStream(REMOTE_STREAM, event.stream);
         document.getElementById("remote-video").src = URL.createObjectURL(event.stream);
     }
 

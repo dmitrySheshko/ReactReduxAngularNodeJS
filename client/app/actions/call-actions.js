@@ -98,3 +98,10 @@ export function onIce(ice){
         ice
     }
 }
+
+export function setStream(streamType, stream){
+    return {
+        type: streamType,
+        stream
+    }
+}

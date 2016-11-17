@@ -31,6 +31,10 @@
     margin: 0 5px; }
     .call-component .outgoing-call .buttons a.btn-reject, .call-component .ingoing-call .buttons a.btn-reject, .call-component .video-call .buttons a.btn-reject {
       color: #f00; }
+    .call-component .outgoing-call .buttons a.btn-audio, .call-component .outgoing-call .buttons a.btn-video, .call-component .ingoing-call .buttons a.btn-audio, .call-component .ingoing-call .buttons a.btn-video, .call-component .video-call .buttons a.btn-audio, .call-component .video-call .buttons a.btn-video {
+      color: #0f0; }
+      .call-component .outgoing-call .buttons a.btn-audio.disabled, .call-component .outgoing-call .buttons a.btn-video.disabled, .call-component .ingoing-call .buttons a.btn-audio.disabled, .call-component .ingoing-call .buttons a.btn-video.disabled, .call-component .video-call .buttons a.btn-audio.disabled, .call-component .video-call .buttons a.btn-video.disabled {
+        color: #f00; }
 .call-component .ingoing-call {
   position: absolute;
   right: 30px;

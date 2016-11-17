@@ -46,6 +46,14 @@
         &.btn-reject {
           color: #f00;
         }
+        &.btn-audio,
+        &.btn-video {
+          color: #0f0;
+
+          &.disabled {
+            color: #f00;
+          }
+        }
       }
     }
   }

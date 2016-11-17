@@ -34,3 +34,5 @@ export const SET_ON_ICE = 'SET_ON_ICE';
 export const SET_CREATE_ANSWER = 'SET_CREATE_ANSWER';
 export const CREATE_ANSWER = 'CREATE_ANSWER';
 export const SET_ON_ANSWER = 'SET_ON_ANSWER';
+export const LOCAL_STREAM = 'LOCAL_STREAM';
+export const REMOTE_STREAM = 'REMOTE_STREAM';

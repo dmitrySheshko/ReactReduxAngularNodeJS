@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 
 class VideoCall extends React.Component {
 
@@ -34,10 +35,10 @@ class VideoCall extends React.Component {
                     </div>
                 </div>
                 <div className='buttons'>
-                    <a href='javascript:void(0)' className='btn-audio' onClick={ this.changeAudioAccess }>
+                    <a href='javascript:void(0)' className={ classnames('btn-audio', {'disabled': !this.props.mediaAccess.audioAccess}) } onClick={ this.changeAudioAccess }>
                         <i className='glyphicon glyphicon-volume-down'></i>
                     </a>
-                    <a href='javascript:void(0)' className='btn-video' onClick={ this.changeVideoAccess }>
+                    <a href='javascript:void(0)' className={ classnames('btn-video', {'disabled': !this.props.mediaAccess.videoAccess}) } onClick={ this.changeVideoAccess }>
                         <i className='glyphicon glyphicon-facetime-video'></i>
                     </a>
                     <a href='javascript:void(0)' className='btn-reject' onClick={ this.endCall }>

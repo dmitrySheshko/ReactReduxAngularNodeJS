@@ -1,4 +1,4 @@
-import { OUTGOING_CALL, END_CALL, SET_RECEIVER, REMOVE_RECEIVER, INGOING_CALL, VIDEO_ACCESS, AUDIO_ACCESS, ACCEPT_INGOING_CALL, START_CALL, SET_CREATE_OFFER, SET_ON_ICE, SET_CREATE_ANSWER, CREATE_ANSWER, SET_ON_ANSWER, ANSWER, ICE } from '../../common/constants/const';
+import { OUTGOING_CALL, END_CALL, SET_RECEIVER, REMOVE_RECEIVER, INGOING_CALL, VIDEO_ACCESS, AUDIO_ACCESS, ACCEPT_INGOING_CALL, START_CALL, SET_CREATE_OFFER, SET_ON_ICE, SET_CREATE_ANSWER, CREATE_ANSWER, SET_ON_ANSWER, ANSWER, ICE, LOCAL_STREAM, REMOTE_STREAM } from '../../common/constants/const';
 
 const initialState = {
     outgoingCall: false,
@@ -8,8 +8,8 @@ const initialState = {
     caller: {},
     audioAccess: true,
     videoAccess: true,
-    audioStream: null,
-    videoStream: null,
+    localStream: null,
+    remoteStream: null,
     createOffer: null,
     createAnswer: null,
     onIce: null,
@@ -23,13 +23,25 @@ const ownerReducer = function(state = initialState, action){
         case OUTGOING_CALL:
             return { ...state, outgoingCall: true };
         case END_CALL:
-            //TODO: remove streams
-            return { ...state, outgoingCall: false, ingoingCall: false, startCall: false, receiver: {}, caller: {} };
+            URL.revokeObjectURL(state.localStream);
+            URL.revokeObjectURL(state.remoteStream);
+            state.localStream.getTracks().forEach(function (track) {
+                track.stop();
+            });
+            return { ...state, outgoingCall: false, ingoingCall: false, startCall: false, receiver: {}, caller: {}, localStream: null, remoteStream: null };
         case INGOING_CALL:
             return { ...state, ingoingCall: true, caller: action.caller };
         case VIDEO_ACCESS:
+            console.log('videoAccess', state.videoAccess);
+            if(state.localStream && state.localStream.getVideoTracks()[0]){
+                state.localStream.getVideoTracks()[0].enabled = !state.videoAccess;
+            }
             return { ...state, videoAccess: !state.videoAccess };
         case AUDIO_ACCESS:
+            console.log('audioAccess', state.audioAccess);
+            if(state.localStream && state.localStream.getAudioTracks()[0]){
+                state.localStream.getAudioTracks()[0].enabled = !state.audioAccess;
+            }
             return { ...state, audioAccess: !state.audioAccess };
         case ACCEPT_INGOING_CALL:
             return { ...state, startCall: true, ingoingCall: false };
@@ -61,6 +73,12 @@ const ownerReducer = function(state = initialState, action){
                 state.onIce(action.ice);
             }
             return state;
+        case LOCAL_STREAM:
+            return { ...state, localStream: action.stream };
+            break;
+        case REMOTE_STREAM:
+            return { ...state, remoteStream: action.stream };
+            break;
         default :
             return state;
     }
