@@ -26,15 +26,17 @@ export function setIngoingCall(caller){
     }
 }
 
-export function changeVideoAccess(){
+export function changeVideoAccess(videoAccess){
     return {
-        type: VIDEO_ACCESS
+        type: VIDEO_ACCESS,
+        videoAccess
     }
 }
 
-export function changeAudioAccess(){
+export function changeAudioAccess(audioAccess){
     return {
-        type: AUDIO_ACCESS
+        type: AUDIO_ACCESS,
+        audioAccess
     }
 }
 

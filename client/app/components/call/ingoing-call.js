@@ -40,7 +40,7 @@ class IngoingCall extends React.Component {
     }
 
     acceptAudioCall(){
-        this.props.actions.changeVideoAccess();
+        this.props.actions.changeVideoAccess(false);
         this.acceptCall();
     }
 
@@ -135,6 +135,7 @@ class IngoingCall extends React.Component {
             this.gotAnswerLocalDescription,
             this.errorCallback,
             {'mandatory': { 'OfferToReceiveAudio': this.props.mediaAccess.audioAccess, 'OfferToReceiveVideo': this.props.mediaAccess.videoAccess }}
+            //{'mandatory': { 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true }}
         );
     }
 

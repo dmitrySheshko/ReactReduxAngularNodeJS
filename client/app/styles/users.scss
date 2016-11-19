@@ -2,9 +2,9 @@
   min-height: 343px;
 
   .owner-row {
-    background-color: #ccc;
+    background-color: #ccc !important;
     &:hover {
-      background-color: #ccc;
+      background-color: #ccc !important;
     }
   }
 }

@@ -44,6 +44,17 @@ app.get('/styles/main.css', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/app/styles/main.css'));
 });
 
+app.get('/bower_components/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/admin/bower_components/' + req.params[0]));
+});
+app.get('/admin/app/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/admin/app/' + req.params[0]));
+});
+
+app.get('/admin', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/admin/index.html'));
+});
+
 app.use('/api', apiController);
 
 app.get('/*', (req, res) => {

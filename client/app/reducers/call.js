@@ -32,17 +32,33 @@ const ownerReducer = function(state = initialState, action){
         case INGOING_CALL:
             return { ...state, ingoingCall: true, caller: action.caller };
         case VIDEO_ACCESS:
-            console.log('videoAccess', state.videoAccess);
+            console.log('videoAccess: ', action.videoAccess);
+            let videoAccess = !state.videoAccess;
+            if(action.videoAccess !== undefined){
+                videoAccess = action.videoAccess;
+            }
             if(state.localStream && state.localStream.getVideoTracks()[0]){
-                state.localStream.getVideoTracks()[0].enabled = !state.videoAccess;
+                state.localStream.getVideoTracks()[0].enabled = videoAccess;
             }
-            return { ...state, videoAccess: !state.videoAccess };
+            return { ...state, videoAccess: videoAccess };
         case AUDIO_ACCESS:
-            console.log('audioAccess', state.audioAccess);
-            if(state.localStream && state.localStream.getAudioTracks()[0]){
-                state.localStream.getAudioTracks()[0].enabled = !state.audioAccess;
+            console.log('audioAccess: ', action.audioAccess);
+            let audioAccess = !state.audioAccess;
+            if(action.audioAccess !== undefined){
+                audioAccess = action.audioAccess;
             }
-            return { ...state, audioAccess: !state.audioAccess };
+            if(state.localStream && state.localStream.getAudioTracks()[0]){
+                state.localStream.getAudioTracks()[0].enabled = audioAccess;
+            }
+            /*if(state.localStream && state.localStream.getAudioTracks()[0]){
+                if(action.audioAccess === undefined) {
+                    state.localStream.getAudioTracks()[0].enabled = !state.audioAccess;
+                }
+                else {
+                    state.localStream.getAudioTracks()[0].enabled = action.audioAccess;
+                }
+            }*/
+            return { ...state, audioAccess: audioAccess };
         case ACCEPT_INGOING_CALL:
             return { ...state, startCall: true, ingoingCall: false };
         case SET_CREATE_OFFER:

@@ -14,15 +14,15 @@ class Call extends React.Component {
         this.checkUserMedia = this.checkUserMedia.bind(this);
     }
 
-    componentWillMount(){
+    componentDidMount(){
         this.checkUserMedia();
     }
 
     checkUserMedia(){
         navigator.mediaDevices.enumerateDevices().then((devices) => {
             if(devices.length){
-                var audio = null;
-                var video = null;
+                var audio = false;
+                var video = false;
                 devices.forEach(function(device){
                     if(device.kind == "videoinput"){
                         video = true;

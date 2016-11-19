@@ -111,6 +111,7 @@ class OutgoingCall extends React.Component {
             this.gotOfferLocalDescription,
             this.errorCallback,
             {'mandatory': { 'OfferToReceiveAudio': this.props.mediaAccess.audioAccess, 'OfferToReceiveVideo': this.props.mediaAccess.videoAccess }}
+            //{'mandatory': { 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true }}
         );
     }
 

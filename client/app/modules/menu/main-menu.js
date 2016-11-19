@@ -16,11 +16,16 @@ class MainMenu extends React.Component {
         this.props.actions.logout(this.props.owner.id);
     }
 
+    goToAdminPanel(){
+        window.location.href = '/admin';
+    }
+
     render(){
         const userLinks = (
             <ul className="nav navbar-nav pull-right">
-                <li><Link to="/office">{(isEmpty(this.props.owner)) ? '' : this.props.owner.name}</Link></li>
+                <li><Link to="/office">{ (this.props.owner) ? this.props.owner.name : '' }</Link></li>
                 <li><a href="javascript:void(0);" onClick={ this.logout }>Logout</a></li>
+                <li>{ (this.props.owner.role === 'admin') ? <a href='javascript:void(0)' onClick={ this.goToAdminPanel }>Admin</a> : '' }</li>
             </ul>
         );
 

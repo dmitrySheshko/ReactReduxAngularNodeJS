@@ -107,9 +107,9 @@
 .users-table {
   min-height: 343px; }
   .users-table .owner-row {
-    background-color: #ccc; }
+    background-color: #ccc !important; }
     .users-table .owner-row:hover {
-      background-color: #ccc; }
+      background-color: #ccc !important; }
 
 .office-page .navbar.navbar-default {
   margin-right: 30px; }

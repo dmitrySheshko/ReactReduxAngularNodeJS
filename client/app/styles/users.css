@@ -1,8 +1,8 @@
 .users-table {
   min-height: 343px; }
   .users-table .owner-row {
-    background-color: #ccc; }
+    background-color: #ccc !important; }
     .users-table .owner-row:hover {
-      background-color: #ccc; }
+      background-color: #ccc !important; }
 
 /*# sourceMappingURL=users.css.map */
