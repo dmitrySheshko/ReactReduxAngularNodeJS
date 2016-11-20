@@ -32,7 +32,6 @@ const ownerReducer = function(state = initialState, action){
         case INGOING_CALL:
             return { ...state, ingoingCall: true, caller: action.caller };
         case VIDEO_ACCESS:
-            console.log('videoAccess: ', action.videoAccess);
             let videoAccess = !state.videoAccess;
             if(action.videoAccess !== undefined){
                 videoAccess = action.videoAccess;
@@ -42,7 +41,6 @@ const ownerReducer = function(state = initialState, action){
             }
             return { ...state, videoAccess: videoAccess };
         case AUDIO_ACCESS:
-            console.log('audioAccess: ', action.audioAccess);
             let audioAccess = !state.audioAccess;
             if(action.audioAccess !== undefined){
                 audioAccess = action.audioAccess;
@@ -50,14 +48,6 @@ const ownerReducer = function(state = initialState, action){
             if(state.localStream && state.localStream.getAudioTracks()[0]){
                 state.localStream.getAudioTracks()[0].enabled = audioAccess;
             }
-            /*if(state.localStream && state.localStream.getAudioTracks()[0]){
-                if(action.audioAccess === undefined) {
-                    state.localStream.getAudioTracks()[0].enabled = !state.audioAccess;
-                }
-                else {
-                    state.localStream.getAudioTracks()[0].enabled = action.audioAccess;
-                }
-            }*/
             return { ...state, audioAccess: audioAccess };
         case ACCEPT_INGOING_CALL:
             return { ...state, startCall: true, ingoingCall: false };

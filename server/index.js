@@ -15,7 +15,6 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../webpack.config.dev';
 
 import apiController from './controllers/api-controller';
-
 import wsModule from './modules/ws/ws-module';
 
 let app = express();
@@ -44,14 +43,14 @@ app.get('/styles/main.css', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/app/styles/main.css'));
 });
 
-app.get('/bower_components/*', (req, res) => {
+app.get('/admin/bower_components/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/admin/bower_components/' + req.params[0]));
 });
 app.get('/admin/app/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/admin/app/' + req.params[0]));
 });
 
-app.get('/admin', (req, res) => {
+app.get(['/admin', '/admin/*'], (req, res) => {
     res.sendFile(path.join(__dirname, '../client/admin/index.html'));
 });
 

@@ -28,5 +28,9 @@ app.config(function ($urlRouterProvider, $stateProvider) {
                     templateUrl: '/admin/app/components/users/users.html'
                 }
             }
+        })
+        .state({
+            name: 'main.users.page',
+            url: '/:page'
         });
 });

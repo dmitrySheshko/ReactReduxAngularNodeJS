@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
             res.send(200, new UserPublicModel(user));
         }
         else {
-            res.send(404);
+            res.send(401);
         }
     });
 });
