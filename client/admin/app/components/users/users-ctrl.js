@@ -1,9 +1,13 @@
-let usersCtrl = function(usersService) {
+let UsersCtrl = function(UsersService) {
     'use strict';
     let users = this;
 
     users.getUsers = () => {
-        usersService.getUsers();
+        UsersService.getUsers();
+    };
+
+    users.getUsersList = () => {
+        return UsersService.getUsersList();
     };
 
     users.init = () => {
@@ -13,5 +17,5 @@ let usersCtrl = function(usersService) {
     users.init();
 };
 
-app.controller('usersCtrl', usersCtrl);
-usersCtrl.$inject = ['usersService'];
+app.controller('UsersCtrl', UsersCtrl);
+UsersCtrl.$inject = ['UsersService'];

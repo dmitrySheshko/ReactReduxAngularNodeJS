@@ -1,9 +1,9 @@
-let usersService = function(apiService, storageService){
+let UsersService = function(apiService, storageService, $state){
     'use strict';
     let users = this;
 
     users.getUsers = () => {
-        apiService.getUsers().then(users.setUsers);
+        apiService.getUsers($state.params.page).then(users.setUsers);
     };
 
     users.setUsers = users => {
@@ -21,5 +21,5 @@ let usersService = function(apiService, storageService){
     return users;
 };
 
-app.service('usersService', usersService);
-usersService.$inject = ['apiService', 'storageService'];
+app.service('UsersService', UsersService);
+UsersService.$inject = ['apiService', 'storageService', '$state'];

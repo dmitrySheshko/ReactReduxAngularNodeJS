@@ -11,9 +11,16 @@ app.config(function ($urlRouterProvider, $stateProvider) {
             }
         })
         .state({
+            name: 'site',
+            url: '',
+            onEnter: () => {
+                window.location.href = '/';
+            }
+        })
+        .state({
             name: 'main',
             url: '',
-            abstract: true,
+            //abstract: true,
             views: {
                 'main': {
                     templateUrl: '/admin/app/components/main/main.html'

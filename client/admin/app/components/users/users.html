@@ -1,3 +1,5 @@
-<div ng-controller="usersCtrl">
-
+<div ng-controller="UsersCtrl as users">
+    <div ng-repeat="user in users.getUsersList()">
+        <div ng-bind="user.name"></div>
+    </div>
 </div>
