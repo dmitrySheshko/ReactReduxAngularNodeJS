@@ -2,4 +2,11 @@
     <div ng-repeat="user in users.getUsersList()">
         <div ng-bind="user.name"></div>
     </div>
+    <ul
+            uib-pagination direction-links="false"
+            boundary-links="true"
+            total-items="totalUsers"
+            ng-model="currentPage"
+            items-per-page="10"
+            ng-change="users.changePage()"></ul>
 </div>

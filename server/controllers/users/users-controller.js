@@ -9,7 +9,7 @@ let router = express.Router();
 
 router.get('/:id', (req, res, next) => {
     User.findOne({id: req.params.id}, (err, user) => {
-        if (err) next(err);
+        if (err) return next(err);
         const onlineUsers = WsModule.users;
         user.online = onlineUsers.some(itemUser => {
             return itemUser.id === user.id;
@@ -21,7 +21,7 @@ router.get('/:id', (req, res, next) => {
 router.put('/', (req, res, next) => {
     let data = req.body.data;
     User.findByIdAndUpdate({_id: req.session.user}, {$set: {name: data.name, role: data.role, gender: data.gender, description: data.description}}, {new: true}, (err, user)=> {
-        if(err) next();
+        if(err) return next();
         res.send(200, new UserPublicModel(user));
     });
 });
@@ -29,9 +29,9 @@ router.put('/', (req, res, next) => {
 router.get('/', (req, res, next) => {
     let currentPage = req.query.page;
     User.count((err, count) => {
-        if(err) next(err);
+        if(err) return next(err);
         User.find({}, (err, users) => {
-            if(err) next(err);
+            if(err) return next(err);
             let usersList = getUsers(users);
             res.send({
                 usersCount: count,

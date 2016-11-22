@@ -12,7 +12,7 @@ import fs from 'fs';
 import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import webpackConfig from '../webpack.config.dev';
+import webpackConfig from '../webpack.config';
 
 import apiController from './controllers/api-controller';
 import wsModule from './modules/ws/ws-module';
@@ -43,21 +43,26 @@ app.get('/styles/main.css', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/app/styles/main.css'));
 });
 
-app.get('/admin/bower_components/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/admin/bower_components/' + req.params[0]));
-});
-app.get('/admin/app/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/admin/app/' + req.params[0]));
+//app.get('/admin/bower_components/*', (req, res) => {
+//    res.sendFile(path.join(__dirname, '../client/admin/bower_components/' + req.params[0]));
+//});
+//app.get('/admin/app/*', (req, res) => {
+//    res.sendFile(path.join(__dirname, '../client/admin/app/' + req.params[0]));
+//});
+app.get('/js/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../dist/js/' + req.params[0]));
 });
 
 app.get(['/admin', '/admin/*'], (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/admin/index.html'));
+    //res.sendFile(path.join(__dirname, '../client/admin/index.html'));
+    res.sendFile(path.join(__dirname, '../dist/admin.html'));
 });
 
 app.use('/api', apiController);
 
 app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/app/index.html'));
+    //res.sendFile(path.join(__dirname, '../client/app/index.html'));
+    res.sendFile(path.join(__dirname, '../dist/site.html'));
 });
 
 mongoose.connection.on('open', () => console.log('Connect to DB'));

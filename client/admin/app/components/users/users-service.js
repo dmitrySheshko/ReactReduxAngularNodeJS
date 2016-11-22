@@ -2,8 +2,14 @@ let UsersService = function(apiService, storageService, $state){
     'use strict';
     let users = this;
 
-    users.getUsers = () => {
-        apiService.getUsers($state.params.page).then(users.setUsers);
+    users.getUsers = (callback) => {
+        let currentPage = $state.params.page || 1;
+        apiService.getUsers(currentPage).then(response => {
+            users.setUsers(response);
+            if(callback) {
+                callback(response.usersCount);
+            }
+        });
     };
 
     users.setUsers = users => {
@@ -16,6 +22,19 @@ let UsersService = function(apiService, storageService, $state){
 
     users.getUsersCount = () => {
         return storageService.users.usersCount;
+    };
+
+    users.goToPage = (page) => {
+        if(page && page !== 1){
+            $state.go('main.users.page', {page: page});
+        }
+        else {
+            $state.go('main.users');
+        }
+    };
+
+    users.getCurrentPage = () => {
+        return $state.params.page;
     };
 
     return users;

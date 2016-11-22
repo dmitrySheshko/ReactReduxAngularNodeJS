@@ -1,19 +1,10 @@
+import angular from 'angular';
+import AppRun from './config/app-run';
+
 let app = angular.module('adminApp', [
     'ui.router',
     'ui.bootstrap',
     'restangular',
     'menu',
     'footer'
-]).run((Restangular, $state, apiService, storageService) => {
-
-    Restangular.setErrorInterceptor((response) => {
-        if (response.status === 401) {
-            $state.go('login');
-            return false;
-        }
-    });
-
-    apiService.getSession().then(owner => {
-        storageService.setData('owner', owner.plain());
-    });
-});
+]).run(AppRun(Restangular, $state, apiService, storageService));
