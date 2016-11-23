@@ -1,4 +1,4 @@
-app.config(function ($urlRouterProvider, $stateProvider) {
+function Router($urlRouterProvider, $stateProvider) {
     $urlRouterProvider.otherwise('/login');
     $stateProvider
         .state({
@@ -6,7 +6,7 @@ app.config(function ($urlRouterProvider, $stateProvider) {
             url: '/login',
             views: {
                 'main': {
-                    templateUrl: '/admin/app/components/login/login.html'
+                    templateUrl: '/admin/templates/components/login/login.html'
                 }
             }
         })
@@ -23,7 +23,7 @@ app.config(function ($urlRouterProvider, $stateProvider) {
             //abstract: true,
             views: {
                 'main': {
-                    templateUrl: '/admin/app/components/main/main.html'
+                    templateUrl: '/admin/templates/components/main/main.html'
                 }
             }
         })
@@ -32,7 +32,7 @@ app.config(function ($urlRouterProvider, $stateProvider) {
             url: '/users',
             views: {
                 'children': {
-                    templateUrl: '/admin/app/components/users/users.html'
+                    templateUrl: '/admin/templates/components/users/users.html'
                 }
             }
         })
@@ -40,4 +40,6 @@ app.config(function ($urlRouterProvider, $stateProvider) {
             name: 'main.users.page',
             url: '/:page'
         });
-});
+}
+Router.$inject = ['$urlRouterProvider', '$stateProvider'];
+export default Router;

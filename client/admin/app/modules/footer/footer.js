@@ -1,7 +1,10 @@
-angular.module('footer', [])
-.directive('footer', () => {
+import angular from 'angular';
+
+export default angular.module('footer', [])
+    .directive('footer', () => {
         return {
             restrict: 'E',
-            templateUrl: '/admin/app/modules/footer/footer.html'
+            templateUrl: '/admin/templates/modules/footer/footer.html'
         }
-    });
+    })
+    .name;

@@ -1,19 +1,15 @@
-let apiService = function(Restangular) {
-    'use strict';
+class ApiService {
+    constructor(Restangular){
+        this.rest = Restangular.all('/api');
+    }
 
-    let api = this;
-    let rest = Restangular.all('/api');
-
-    api.getSession = () => {
-        return rest.customGET('session');
+    getSession() {
+        return this.rest.customGET('session');
     };
 
-    api.getUsers = page => {
-        return rest.customGET('users', {page: page});
+    getUsers(page) {
+        return this.rest.customGET('users', {page: page});
     };
-
-    return api;
-};
-
-app.service('apiService', apiService);
-apiService.$inject = ['Restangular'];
+}
+ApiService.$inject = ['Restangular'];
+export default  ApiService;

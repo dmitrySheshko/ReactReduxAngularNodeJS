@@ -1,6 +1,32 @@
-let UsersCtrl = function($scope, UsersService) {
-    'use strict';
-    let users = this;
+class UsersCtrl {
+    constructor($scope, UsersService){
+        $scope.currentPage = 0;
+        $scope.usersCount = 0;
+    }
+
+    getUsers() {
+        UsersService.getUsers(this.setUsersCount);
+    }
+
+    getUsersList() {
+        return UsersService.getUsersList();
+    };
+
+    changePage() {
+        UsersService.goToPage($scope.currentPage);
+        this.getUsers();
+    };
+
+    setUsersCount(usersCount) {
+        $scope.usersCount = usersCount;
+    };
+
+    init() {
+        $scope.currentPage = UsersService.getCurrentPage();
+        this.getUsers();
+    };
+
+    /*let users = this;
 
     $scope.currentPage;
     $scope.usersCount;
@@ -27,8 +53,6 @@ let UsersCtrl = function($scope, UsersService) {
         users.getUsers();
     };
 
-    users.init();
-};
-
-app.controller('UsersCtrl', UsersCtrl);
+    users.init();*/
+}
 UsersCtrl.$inject = ['$scope', 'UsersService'];

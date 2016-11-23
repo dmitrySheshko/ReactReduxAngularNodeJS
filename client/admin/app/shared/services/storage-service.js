@@ -1,35 +1,40 @@
-let storageService = function() {
-    'use strict';
-    let storage = this;
+class StorageService {
 
-    storage.owner = {};
-    storage.users = {};
+    constructor(){
+        this.state = {
+            owner: {},
+            users: {}
+        };
+        this.setData = this.setData.bind(this);
+        this.clearServiceField = this.clearServiceField.bind(this);
+        this.clearService = this.clearService.bind(this);
+    }
 
-    storage.setData = (field, data) => {
-        storage[field] = data;
+    setData(field, data) {
+        this.state[field] = data;
     };
 
-    storage.clearServiceField = fieldName => {
-        switch(typeof storage[fieldName]){
+    clearServiceField(fieldName) {
+        switch(typeof this.state[fieldName]){
             case 'object':
-                storage[fieldName] = {};
+                this.state[fieldName] = {};
                 break;
             case 'array':
-                storage[fieldName] = [];
+                this.state[fieldName] = [];
                 break;
             case 'function':
                 break;
             default:
-                storage[fieldName] = null;
+                this.state[fieldName] = null;
                 break;
         }
     };
 
-    storage.clearService = () => {
-        for(let field in storage){
-            storage.clearServiceField(field);
+    clearService() {
+        for(let field in this.state){
+            this.clearServiceField(field);
         }
     };
-};
-app.service('storageService', storageService);
-storageService.$inject = [];
+}
+StorageService.$inject = [];
+export default StorageService;
