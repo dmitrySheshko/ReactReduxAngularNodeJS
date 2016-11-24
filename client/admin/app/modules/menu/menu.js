@@ -10,9 +10,9 @@ export default angular.module('menu', [])
     .directive('menu', () => {
         return {
             restrict: 'E',
-            transclude: true,
+            //transclude: true,
             templateUrl: '/admin/templates/modules/menu/menu.html',
-            replace: true,
+            //replace: true,
             controller: 'MenuCtrl as menu'
         }
     }).name;

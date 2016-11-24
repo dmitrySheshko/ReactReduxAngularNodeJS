@@ -1,58 +1,37 @@
 class UsersCtrl {
     constructor($scope, UsersService){
-        $scope.currentPage = 0;
-        $scope.usersCount = 0;
+        this.$scope = $scope;
+        this.UsersService = UsersService;
+        this.$scope.currentPage = 0;
+        this.$scope.usersCount = 0;
+
+        this.setUsersCount = this.setUsersCount.bind(this);
+        this.getUsers = this.getUsers.bind(this);
+
+        this.init();
     }
 
     getUsers() {
-        UsersService.getUsers(this.setUsersCount);
+        this.UsersService.getUsers(this.setUsersCount);
     }
 
     getUsersList() {
-        return UsersService.getUsersList();
+        return this.UsersService.getUsersList();
     };
 
     changePage() {
-        UsersService.goToPage($scope.currentPage);
-        this.getUsers();
+        this.UsersService.goToPage(this.$scope.currentPage, this.getUsers);
     };
 
     setUsersCount(usersCount) {
-        $scope.usersCount = usersCount;
+        this.$scope.usersCount = usersCount;
     };
 
     init() {
-        $scope.currentPage = UsersService.getCurrentPage();
+        this.$scope.currentPage = this.UsersService.getCurrentPage();
         this.getUsers();
     };
-
-    /*let users = this;
-
-    $scope.currentPage;
-    $scope.usersCount;
-
-    users.getUsers = () => {
-        UsersService.getUsers(users.setUsersCount);
-    };
-
-    users.getUsersList = () => {
-        return UsersService.getUsersList();
-    };
-
-    users.changePage = function () {
-        UsersService.goToPage($scope.currentPage);
-        users.getUsers();
-    };
-
-    users.setUsersCount = (usersCount) => {
-        $scope.usersCount = usersCount;
-    };
-
-    users.init = () => {
-        $scope.currentPage = UsersService.getCurrentPage();
-        users.getUsers();
-    };
-
-    users.init();*/
 }
+
 UsersCtrl.$inject = ['$scope', 'UsersService'];
+export default UsersCtrl;

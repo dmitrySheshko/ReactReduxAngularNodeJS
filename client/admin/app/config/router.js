@@ -20,7 +20,7 @@ function Router($urlRouterProvider, $stateProvider) {
         .state({
             name: 'main',
             url: '',
-            //abstract: true,
+            abstract: true,
             views: {
                 'main': {
                     templateUrl: '/admin/templates/components/main/main.html'

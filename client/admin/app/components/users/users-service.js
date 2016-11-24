@@ -1,44 +1,46 @@
-let UsersService = function(apiService, storageService, $state){
-    'use strict';
-    let users = this;
+class UsersService {
+    constructor(ApiService, StorageService, $state){
+        this.ApiService = ApiService;
+        this.StorageService = StorageService;
+        this.$state = $state;
+        this.getUsers = this.getUsers.bind(this);
+    }
 
-    users.getUsers = (callback) => {
-        let currentPage = $state.params.page || 1;
-        apiService.getUsers(currentPage).then(response => {
-            users.setUsers(response);
-            if(callback) {
+    getUsers(callback) {
+        let currentPage = this.$state.params.page || 1;
+        this.ApiService.getUsers(currentPage).then(response => {
+            this.setUsers(response);
+            if(typeof callback === 'function') {
                 callback(response.usersCount);
             }
         });
     };
 
-    users.setUsers = users => {
-        storageService.setData('users', users.plain());
+    setUsers(users) {
+        this.StorageService.setData('users', users.plain());
     };
 
-    users.getUsersList = () => {
-        return storageService.users.users;
+    getUsersList() {
+        return this.StorageService.state.users.users;
     };
 
-    users.getUsersCount = () => {
-        return storageService.users.usersCount;
+    getUsersCount () {
+        return this.StorageService.state.users.usersCount;
     };
 
-    users.goToPage = (page) => {
+    goToPage(page, callback) {
         if(page && page !== 1){
-            $state.go('main.users.page', {page: page});
+            this.$state.go('main.users.page', {page: page}).then(callback);
         }
         else {
-            $state.go('main.users');
+            this.$state.go('main.users').then(callback);
         }
     };
 
-    users.getCurrentPage = () => {
-        return $state.params.page;
+    getCurrentPage() {
+        return this.$state.params.page;
     };
+}
 
-    return users;
-};
-
-app.service('UsersService', UsersService);
-UsersService.$inject = ['apiService', 'storageService', '$state'];
+UsersService.$inject = ['ApiService', 'StorageService', '$state'];
+export default UsersService;

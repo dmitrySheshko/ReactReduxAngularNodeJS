@@ -5,9 +5,6 @@ class StorageService {
             owner: {},
             users: {}
         };
-        this.setData = this.setData.bind(this);
-        this.clearServiceField = this.clearServiceField.bind(this);
-        this.clearService = this.clearService.bind(this);
     }
 
     setData(field, data) {

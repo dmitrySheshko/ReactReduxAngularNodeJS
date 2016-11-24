@@ -4,7 +4,8 @@ export default angular.module('footer', [])
     .directive('footer', () => {
         return {
             restrict: 'E',
-            templateUrl: '/admin/templates/modules/footer/footer.html'
+            transclude: true,
+            templateUrl: '/admin/templates/modules/footer/footer.html',
+            replace: true
         }
-    })
-    .name;
+    }).name;

@@ -5,8 +5,8 @@
     <ul
             uib-pagination direction-links="false"
             boundary-links="true"
-            total-items="totalUsers"
+            total-items="usersCount"
             ng-model="currentPage"
             items-per-page="10"
-            ng-change="users.changePage()"></ul>
+            data-ng-click="users.changePage()"></ul>
 </div>
