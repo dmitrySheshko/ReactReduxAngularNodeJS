@@ -1,7 +1,22 @@
 <div ng-controller="UsersCtrl as users">
-    <div ng-repeat="user in users.getUsersList()">
-        <div ng-bind="user.name"></div>
-    </div>
+    <table class="table table-striped table-hover">
+        <tr>
+            <td></td>
+            <td>Login</td>
+            <td>Name</td>
+            <td>Role</td>
+            <td></td>
+        </tr>
+        <tr ng-repeat="user in users.getUsersList()">
+            <td></td>
+            <td>
+                <a href="javascript:void(0);" ng-bind="user.login"></a>
+            </td>
+            <td ng-bind="user.name"></td>
+            <td ng-bind="user.role"></td>
+            <td>delete</td>
+        </tr>
+    </table>
     <ul
             uib-pagination direction-links="false"
             boundary-links="true"

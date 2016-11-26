@@ -4,11 +4,19 @@ class ApiService {
     }
 
     getSession() {
-        return this.rest.customGET('session');
+        return this.rest.customGET('session/admin');
     };
 
     getUsers(page) {
         return this.rest.customGET('users', {page: page});
+    };
+
+    login(obj){
+        return this.rest.one('auth/login/admin').customPOST(obj);
+    };
+
+    logout(){
+        return this.rest.one('auth/logout').customPOST();
     };
 }
 ApiService.$inject = ['Restangular'];

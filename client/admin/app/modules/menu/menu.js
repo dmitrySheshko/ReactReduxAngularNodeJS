@@ -1,13 +1,21 @@
 import angular from 'angular';
 
 export default angular.module('menu', [])
-    .controller('MenuCtrl', ['UsersService', '$state', function(UsersService, $state) {
+    .controller('MenuCtrl', ['UsersService', '$state', 'ApiService', function(UsersService, $state, ApiService) {
         let menu = this;
+
         menu.goToUsers = () => {
             $state.go('main.users').then(UsersService.getUsers);
-        }
+        };
+
+        menu.logout = () => {
+            ApiService.logout().then(() => {
+                $state.go('login');
+            })
+        };
+
     }])
-    .directive('menu', () => {
+    .directive('adminMenu', () => {
         return {
             restrict: 'E',
             //transclude: true,

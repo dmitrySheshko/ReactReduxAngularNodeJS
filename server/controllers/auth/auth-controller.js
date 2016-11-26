@@ -30,6 +30,24 @@ router.post('/registration', (req, res) => {
     });
 });
 
+router.post('/login/admin', (req, res) => {
+    User.findOne({login: req.body.login}, (err, user) => {
+        if(err) res.send(404);
+        if(user){
+            if(user.password === req.body.password && user.role === 'admin'){
+                req.session.user = user._id;
+                res.send(200, new UserPublicModel(user));
+            }
+            else {
+                res.send(403);
+            }
+        }
+        else {
+            res.send(403);
+        }
+    });
+});
+
 router.post('/login', (req, res) => {
     User.findOne({login: req.body.login}, (err, user) => {
         if(err) res.send(404);
@@ -41,6 +59,9 @@ router.post('/login', (req, res) => {
             else {
                 res.send(400, {error: 'Bad credentials'});
             }
+        }
+        else {
+            res.send(400, {error: 'Bad credentials'});
         }
     });
 });

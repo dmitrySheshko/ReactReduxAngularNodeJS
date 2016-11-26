@@ -12,6 +12,7 @@ import './modules/menu/menu';
 import './modules/footer/footer';
 
 import UsersCtrl from './components/users/users-ctrl';
+import LoginCtrl from './components/login/login-ctrl';
 
 import StorageService from './shared/services/storage-service';
 import ApiService from './api/api';
@@ -28,6 +29,7 @@ export default angular.module('adminApp', [
     .run(['Restangular', '$state', 'ApiService', 'StorageService', AppRun])
     .config(Router)
     .config(Location)
+    .controller('LoginCtrl', LoginCtrl)
     .controller('UsersCtrl', UsersCtrl)
     .service('ApiService', ApiService)
     .service('StorageService', StorageService)
