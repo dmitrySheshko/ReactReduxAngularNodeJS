@@ -1,25 +1,33 @@
-@import '/node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import "../../../node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 body, html {
   height: 100%;
   min-height: 100%;
 }
-.login {
-  width: 400px;
-  height: 260px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: -130px 0 0 -200px;
-  padding: 30px;
-  border: 2px solid #eee;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+.main {
+  margin: 0 15px;
 
-  .title {
-    text-align: center;
-    font-size: 26px;
-    margin-bottom: 25px;
+  .login {
+    width: 400px;
+    height: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -150px 0 0 -200px;
+    padding: 30px;
+    border: 2px solid #eee;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+
+    .title {
+      text-align: center;
+      font-size: 26px;
+      margin-bottom: 25px;
+    }
+  }
+  .error-message {
+    color: #a94442;
+    min-height: 20px;
   }
 }

@@ -11,14 +11,24 @@ class UsersService {
         this.ApiService.getUsers(currentPage).then(response => {
             this.setUsers(response);
             if(typeof callback === 'function') {
-                callback(response.usersCount);
+                callback(response.usersCount, response.currentPage);
             }
         });
     };
 
     setUsers(users) {
-        this.StorageService.setData('users', users.plain());
+        users = users.plain();
+        this.setUsersNumber(users);
+        this.StorageService.setData('users', users);
     };
+
+    setUsersNumber(users){
+        let currentPage = this.$state.params.page || 1;
+        let usersOnPage = 10;
+        users.users.forEach((user, key) => {
+            user.number = key + 1 + (currentPage * usersOnPage - usersOnPage);
+        });
+    }
 
     getUsersList() {
         return this.StorageService.state.users.users;

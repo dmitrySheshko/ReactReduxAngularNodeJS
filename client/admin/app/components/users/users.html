@@ -1,27 +1,30 @@
 <div ng-controller="UsersCtrl as users">
-    <table class="table table-striped table-hover">
-        <tr>
-            <td></td>
-            <td>Login</td>
-            <td>Name</td>
-            <td>Role</td>
-            <td></td>
-        </tr>
-        <tr ng-repeat="user in users.getUsersList()">
-            <td></td>
-            <td>
-                <a href="javascript:void(0);" ng-bind="user.login"></a>
-            </td>
-            <td ng-bind="user.name"></td>
-            <td ng-bind="user.role"></td>
-            <td>delete</td>
-        </tr>
-    </table>
-    <ul
-            uib-pagination direction-links="false"
-            boundary-links="true"
-            total-items="usersCount"
-            ng-model="currentPage"
-            items-per-page="10"
-            data-ng-click="users.changePage()"></ul>
+    <div class="users-page">
+        <h2>Users</h2>
+        <table class="table table-striped table-hover">
+            <tr>
+                <td>#</td>
+                <td>Login</td>
+                <td>Name</td>
+                <td>Role</td>
+                <td></td>
+            </tr>
+            <tr ng-repeat="user in users.getUsersList()">
+                <td ng-bind="user.number"></td>
+                <td>
+                    <a href="javascript:void(0);" ng-bind="user.login" ui-sref="main.user.id({id: user.id})"></a>
+                </td>
+                <td ng-bind="user.name"></td>
+                <td ng-bind="user.role"></td>
+                <td>delete</td>
+            </tr>
+        </table>
+        <ul
+                uib-pagination direction-links="false"
+                boundary-links="true"
+                total-items="usersCount"
+                ng-model="currentPage"
+                items-per-page="10"
+                data-ng-click="users.changePage()"></ul>
+    </div>
 </div>

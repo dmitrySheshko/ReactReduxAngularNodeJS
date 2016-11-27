@@ -1,0 +1,39 @@
+<div ng-controller="UserCtrl as user">
+    <div class="user-page">
+        <h2>User</h2>
+        <table class="table table-striped table-hover">
+            <tr>
+                <td>Login</td>
+                <td ng-bind="user.getUserData().login"></td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td ng-bind="user.getUserData().name"></td>
+            </tr>
+            <tr>
+                <td>Role</td>
+                <td ng-bind="user.getUserData().role"></td>
+            </tr>
+            <tr>
+                <td>Description</td>
+                <td ng-bind="user.getUserData().description"></td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td ng-bind="user.getUserData().gender"></td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>
+                    <span class="btn btn-danger btn-xs" ng-if="user.getUserData().status">Blocked</span>
+                    <span class="btn btn-success btn-xs" ng-if="!user.getUserData().status">Active</span>
+                </td>
+            </tr>
+        </table>
+        <div>
+            <a href="javascript:void(0);" ng-click="user.editUser()">Edit</a>
+            <a href="javascript:void(0);" ng-click="user.deleteUser()">Delete</a>
+            <a href="javascript:void(0);" ng-click="user.blockUser()" ng-bind="!user.status ? 'Block' : 'Unblock'"></a>
+        </div>
+    </div>
+</div>

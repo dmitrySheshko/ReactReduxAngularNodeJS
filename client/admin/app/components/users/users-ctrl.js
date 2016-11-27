@@ -8,7 +8,7 @@ class UsersCtrl {
         this.setUsersCount = this.setUsersCount.bind(this);
         this.getUsers = this.getUsers.bind(this);
 
-        this.init();
+        this.getUsers();
     }
 
     getUsers() {
@@ -23,13 +23,9 @@ class UsersCtrl {
         this.UsersService.goToPage(this.$scope.currentPage, this.getUsers);
     };
 
-    setUsersCount(usersCount) {
+    setUsersCount(usersCount, currentPage) {
         this.$scope.usersCount = usersCount;
-    };
-
-    init() {
-        this.$scope.currentPage = this.UsersService.getCurrentPage();
-        this.getUsers();
+        this.$scope.currentPage = currentPage;
     };
 }
 

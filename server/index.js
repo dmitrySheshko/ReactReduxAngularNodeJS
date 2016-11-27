@@ -46,10 +46,6 @@ app.get('/styles/main.css', (req, res) => {
 app.get('/admin/styles/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/admin/styles/' + req.params[0]));
 });
-
-app.get('/node_modules/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../node_modules/' + req.params[0]));
-});
 /*-----------------------------------------------*/
 app.get('/admin/templates/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/admin/app/' + req.params[0]));

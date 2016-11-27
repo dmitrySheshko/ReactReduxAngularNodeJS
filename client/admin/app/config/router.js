@@ -5,7 +5,7 @@ function Router($urlRouterProvider, $stateProvider) {
             name: 'login',
             url: '/login',
             views: {
-                'main': {
+                main: {
                     templateUrl: '/admin/templates/components/login/login.html'
                 }
             }
@@ -22,7 +22,7 @@ function Router($urlRouterProvider, $stateProvider) {
             url: '',
             abstract: true,
             views: {
-                'main': {
+                main: {
                     templateUrl: '/admin/templates/components/main/main.html'
                 }
             }
@@ -31,7 +31,7 @@ function Router($urlRouterProvider, $stateProvider) {
             name: 'main.users',
             url: '/users',
             views: {
-                'children': {
+                children: {
                     templateUrl: '/admin/templates/components/users/users.html'
                 }
             }
@@ -39,6 +39,19 @@ function Router($urlRouterProvider, $stateProvider) {
         .state({
             name: 'main.users.page',
             url: '/:page'
+        })
+        .state({
+            name: 'main.user',
+            url: '/user',
+            views: {
+                children: {
+                    templateUrl: '/admin/templates/components/user/user.html'
+                }
+            }
+        })
+        .state({
+            name: 'main.user.id',
+            url: '/:id'
         });
 }
 Router.$inject = ['$urlRouterProvider', '$stateProvider'];

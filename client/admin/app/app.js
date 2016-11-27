@@ -13,10 +13,13 @@ import './modules/footer/footer';
 
 import UsersCtrl from './components/users/users-ctrl';
 import LoginCtrl from './components/login/login-ctrl';
+import UserCtrl from './components/user/user-ctrl';
+import EditUserCtrl from './components/user/modal/edit-user-ctrl';
 
 import StorageService from './shared/services/storage-service';
 import ApiService from './api/api';
 import UsersService from './components/users/users-service';
+import UserService from './components/user/user-service';
 
 
 export default angular.module('adminApp', [
@@ -26,12 +29,15 @@ export default angular.module('adminApp', [
     'menu',
     'footer'
 ])
-    .run(['Restangular', '$state', 'ApiService', 'StorageService', AppRun])
+    .run(['Restangular', '$state', 'ApiService', 'StorageService', '$location', AppRun])
     .config(Router)
     .config(Location)
     .controller('LoginCtrl', LoginCtrl)
     .controller('UsersCtrl', UsersCtrl)
+    .controller('UserCtrl', UserCtrl)
+    .controller('EditUserCtrl', EditUserCtrl)
     .service('ApiService', ApiService)
     .service('StorageService', StorageService)
     .service('UsersService', UsersService)
+    .service('UserService', UserService)
     .name;
