@@ -96,25 +96,29 @@
 
 	var _editUserCtrl2 = _interopRequireDefault(_editUserCtrl);
 
-	var _storageService = __webpack_require__(84);
+	var _userAttentionCtrl = __webpack_require__(84);
+
+	var _userAttentionCtrl2 = _interopRequireDefault(_userAttentionCtrl);
+
+	var _storageService = __webpack_require__(85);
 
 	var _storageService2 = _interopRequireDefault(_storageService);
 
-	var _api = __webpack_require__(85);
+	var _api = __webpack_require__(86);
 
 	var _api2 = _interopRequireDefault(_api);
 
-	var _usersService = __webpack_require__(86);
+	var _usersService = __webpack_require__(87);
 
 	var _usersService2 = _interopRequireDefault(_usersService);
 
-	var _userService = __webpack_require__(87);
+	var _userService = __webpack_require__(88);
 
 	var _userService2 = _interopRequireDefault(_userService);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _angular2.default.module('adminApp', ['ui.router', 'restangular', 'ui.bootstrap', 'menu', 'footer']).run(['Restangular', '$state', 'ApiService', 'StorageService', '$location', _appRun2.default]).config(_router2.default).config(_location2.default).controller('LoginCtrl', _loginCtrl2.default).controller('UsersCtrl', _usersCtrl2.default).controller('UserCtrl', _userCtrl2.default).controller('EditUserCtrl', _editUserCtrl2.default).service('ApiService', _api2.default).service('StorageService', _storageService2.default).service('UsersService', _usersService2.default).service('UserService', _userService2.default).name;
+	exports.default = _angular2.default.module('adminApp', ['ui.router', 'restangular', 'ui.bootstrap', 'menu', 'footer']).run(['Restangular', '$state', 'ApiService', 'StorageService', '$location', _appRun2.default]).config(_router2.default).config(_location2.default).controller('LoginCtrl', _loginCtrl2.default).controller('UsersCtrl', _usersCtrl2.default).controller('UserCtrl', _userCtrl2.default).controller('EditUserCtrl', _editUserCtrl2.default).controller('UserAttentionCtrl', _userAttentionCtrl2.default).service('ApiService', _api2.default).service('StorageService', _storageService2.default).service('UsersService', _usersService2.default).service('UserService', _userService2.default).name;
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/home/user/Public/Projects/React/example1/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "app.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -64404,14 +64408,20 @@
 	        this.$uibModalInstance = $uibModalInstance;
 	        this.ApiService = ApiService;
 	        this.isSend = false;
-	        this.model = UserService.user;
+	        this.model = angular.copy(UserService.user);
 	    }
 
 	    _createClass(EditUserCtrl, [{
 	        key: 'edit',
 	        value: function edit() {
-	            this.isSend = true;
-	            this.ApiService.editUser(this.model);
+	            var _this = this;
+
+	            if (!this.isSend) {
+	                this.isSend = true;
+	                this.ApiService.editUser(this.model).then(function (response) {
+	                    _this.$uibModalInstance.close(response.plain());
+	                });
+	            }
 	        }
 	    }, {
 	        key: 'cancel',
@@ -64430,6 +64440,56 @@
 
 /***/ },
 /* 84 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/home/user/Public/Projects/React/example1/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/home/user/Public/Projects/React/example1/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	var UserAttentionCtrl = function () {
+	    function UserAttentionCtrl($uibModalInstance, data) {
+	        _classCallCheck(this, UserAttentionCtrl);
+
+	        this.$uibModalInstance = $uibModalInstance;
+	        this.data = data;
+	        this.isSend = false;
+	    }
+
+	    _createClass(UserAttentionCtrl, [{
+	        key: 'ok',
+	        value: function ok() {
+	            if (!this.isSend) {
+	                this.isSend = true;
+	                if (typeof this.data.successCallback === 'function') {
+	                    this.data.successCallback();
+	                }
+	            }
+	        }
+	    }, {
+	        key: 'cancel',
+	        value: function cancel() {
+	            this.$uibModalInstance.dismiss();
+	        }
+	    }]);
+
+	    return UserAttentionCtrl;
+	}();
+
+	UserAttentionCtrl.$inject = ['$uibModalInstance', 'data'];
+	exports.default = UserAttentionCtrl;
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/home/user/Public/Projects/React/example1/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "user-attention-ctrl.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 85 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/home/user/Public/Projects/React/example1/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/home/user/Public/Projects/React/example1/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -64496,7 +64556,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/home/user/Public/Projects/React/example1/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "storage-service.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 85 */
+/* 86 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/home/user/Public/Projects/React/example1/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/home/user/Public/Projects/React/example1/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -64548,6 +64608,11 @@
 	        value: function editUser(user) {
 	            return this.rest.one('admin/users').customPUT({ data: user });
 	        }
+	    }, {
+	        key: 'changeBlockStatus',
+	        value: function changeBlockStatus(user) {
+	            return this.rest.one('admin/users/block').customPUT({ data: user });
+	        }
 	    }]);
 
 	    return ApiService;
@@ -64559,7 +64624,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/home/user/Public/Projects/React/example1/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "api.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 86 */
+/* 87 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/home/user/Public/Projects/React/example1/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/home/user/Public/Projects/React/example1/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -64648,7 +64713,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/home/user/Public/Projects/React/example1/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "users-service.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 87 */
+/* 88 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/home/user/Public/Projects/React/example1/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/home/user/Public/Projects/React/example1/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -64672,6 +64737,8 @@
 	        this.$uibModal = $uibModal;
 
 	        this.user = {};
+
+	        this.changeBlockStatus = this.changeBlockStatus.bind(this);
 	    }
 
 	    _createClass(UserService, [{
@@ -64686,44 +64753,81 @@
 	    }, {
 	        key: 'editUser',
 	        value: function editUser() {
+	            var _this2 = this;
+
 	            var modal = this.$uibModal.open({
 	                templateUrl: '/admin/templates/components/user/modal/edit-user.html',
 	                controller: 'EditUserCtrl as edit'
 	            });
 
-	            modal.result.then(function () {});
-	            /*var modalInstance = $uibModal.open({
-	                templateUrl: 'scripts/modules/other-modal/other-modal.html',
-	                controller: 'otherModalController as modal',
-	                resolve: {
-	                    data: function(){
-	                        return {
-	                            title: 'Удаление группы',
-	                            text: 'Вы действительно хотите удалить группу?',
-	                            okButton: 'Удалить',
-	                            cancelButton: 'Закрыть'
-	                        }
-	                    }
-	                }
+	            modal.result.then(function (newUser) {
+	                _this2.user = newUser;
 	            });
-	             modalInstance.result.then(function(){
-	                apiService.deleteGroup(id).then(function(){
-	                    for(var i = 0; i < mainService.groups.length; i++){
-	                        if(mainService.groups[i].id == id){
-	                            mainService.groups[i].active = false;
-	                        }
-	                    }
-	                }).catch(function(error){
-	                    console.log(error);
-	                });
-	            }, function(){});*/
 	        }
 	    }, {
 	        key: 'deleteUser',
-	        value: function deleteUser() {}
+	        value: function deleteUser() {
+	            /*var modalInstance = $uibModal.open({
+	             templateUrl: 'scripts/modules/other-modal/other-modal.html',
+	             controller: 'otherModalController as modal',
+	             resolve: {
+	             data: function(){
+	             return {
+	             title: 'Удаление группы',
+	             text: 'Вы действительно хотите удалить группу?',
+	             okButton: 'Удалить',
+	             cancelButton: 'Закрыть'
+	             }
+	             }
+	             }
+	             });
+	              modalInstance.result.then(function(){
+	             apiService.deleteGroup(id).then(function(){
+	             for(var i = 0; i < mainService.groups.length; i++){
+	             if(mainService.groups[i].id == id){
+	             mainService.groups[i].active = false;
+	             }
+	             }
+	             }).catch(function(error){
+	             console.log(error);
+	             });
+	             }, function(){});*/
+	        }
 	    }, {
 	        key: 'blockUser',
-	        value: function blockUser() {}
+	        value: function blockUser() {
+	            var _this3 = this;
+
+	            var modal = this.$uibModal.open({
+	                templateUrl: '/admin/templates/components/user/modal/user-attention.html',
+	                controller: 'UserAttentionCtrl as attention',
+	                resolve: {
+	                    data: function data() {
+	                        return {
+	                            successCallback: function successCallback() {
+	                                _this3.changeBlockStatus(modal);
+	                            },
+	                            title: 'Change user block status',
+	                            message: 'Do you want to change a user block status?'
+	                        };
+	                    }
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'changeBlockStatus',
+	        value: function changeBlockStatus(modal) {
+	            var _this4 = this;
+
+	            var user = {
+	                id: this.user.id,
+	                blocked: !this.user.blocked
+	            };
+	            this.ApiService.changeBlockStatus(user).then(function (newUser) {
+	                _this4.user = newUser.plain();
+	                modal.close();
+	            });
+	        }
 	    }]);
 
 	    return UserService;

@@ -6,5 +6,6 @@ export default class UserPublicModel {
         this.gender = user.gender;
         this.description = user.description;
         this.online = user.online || false;
+        this.blocked = user.blocked || false;
     }
 }

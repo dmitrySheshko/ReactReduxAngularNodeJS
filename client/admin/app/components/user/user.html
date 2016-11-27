@@ -25,8 +25,8 @@
             <tr>
                 <td>Status</td>
                 <td>
-                    <span class="btn btn-danger btn-xs" ng-if="user.getUserData().status">Blocked</span>
-                    <span class="btn btn-success btn-xs" ng-if="!user.getUserData().status">Active</span>
+                    <span class="btn btn-danger btn-xs" ng-if="user.getUserData().blocked">Blocked</span>
+                    <span class="btn btn-success btn-xs" ng-if="!user.getUserData().blocked">Active</span>
                 </td>
             </tr>
         </table>

@@ -12,7 +12,7 @@ module.exports = {
         path: __dirname + '/dist/js',
         filename: '[name].js'
     },
-    watch: NODE_ENV === 'development',
+    //watch: NODE_ENV === 'development',
 
     devtools: NODE_ENV === 'development' ? 'eval-source-map' : null,
 

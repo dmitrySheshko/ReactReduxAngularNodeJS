@@ -7,6 +7,7 @@
                 <td>Login</td>
                 <td>Name</td>
                 <td>Role</td>
+                <td>Block</td>
                 <td></td>
             </tr>
             <tr ng-repeat="user in users.getUsersList()">
@@ -16,6 +17,10 @@
                 </td>
                 <td ng-bind="user.name"></td>
                 <td ng-bind="user.role"></td>
+                <td>
+                    <span class="btn btn-danger btn-xs" ng-if="user.blocked">Blocked</span>
+                    <span class="btn btn-success btn-xs" ng-if="!user.blocked">Active</span>
+                </td>
                 <td>delete</td>
             </tr>
         </table>

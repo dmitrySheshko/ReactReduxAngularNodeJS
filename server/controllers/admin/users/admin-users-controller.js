@@ -19,11 +19,23 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
+router.put('/block', (req, res, next) => {
+    let data = req.body.data;
+    User.findOneAndUpdate({id: data.id}, {$set: {blocked: data.blocked}}, {new: true}, (err, user)=> {
+        if(err) {
+            return next();
+        }
+        res.send(200, new UserAdminModel(user));
+    });
+});
+
 router.put('/', (req, res, next) => {
     let data = req.body.data;
-    User.findByIdAndUpdate({id: data.id}, {$set: {name: data.name, role: data.role, gender: data.gender, description: data.description}}, {new: true}, (err, user)=> {
-        if(err) return next();
-        res.send(200, new UserPublicModel(user));
+    User.findOneAndUpdate({id: data.id}, {$set: {name: data.name, role: data.role, gender: data.gender, description: data.description}}, {new: true}, (err, user)=> {
+        if(err) {
+            return next();
+        }
+        res.send(200, new UserAdminModel(user));
     });
 });
 

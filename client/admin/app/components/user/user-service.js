@@ -5,6 +5,8 @@ class UserService {
         this.$uibModal = $uibModal;
 
         this.user = {};
+
+        this.changeBlockStatus = this.changeBlockStatus.bind(this);
     }
 
     getUser(){
@@ -19,35 +21,9 @@ class UserService {
             controller: 'EditUserCtrl as edit'
         });
 
-        modal.result.then(() => {
-
+        modal.result.then(newUser => {
+            this.user = newUser;
         });
-        /*var modalInstance = $uibModal.open({
-            templateUrl: 'scripts/modules/other-modal/other-modal.html',
-            controller: 'otherModalController as modal',
-            resolve: {
-                data: function(){
-                    return {
-                        title: 'Удаление группы',
-                        text: 'Вы действительно хотите удалить группу?',
-                        okButton: 'Удалить',
-                        cancelButton: 'Закрыть'
-                    }
-                }
-            }
-        });
-
-        modalInstance.result.then(function(){
-            apiService.deleteGroup(id).then(function(){
-                for(var i = 0; i < mainService.groups.length; i++){
-                    if(mainService.groups[i].id == id){
-                        mainService.groups[i].active = false;
-                    }
-                }
-            }).catch(function(error){
-                console.log(error);
-            });
-        }, function(){});*/
     }
 
     deleteUser(){
@@ -55,6 +31,32 @@ class UserService {
     }
 
     blockUser(){
+        let modal = this.$uibModal.open({
+            templateUrl: '/admin/templates/components/user/modal/user-attention.html',
+            controller: 'UserAttentionCtrl as attention',
+            resolve: {
+                data: () => {
+                    return {
+                        successCallback: () => {
+                            this.changeBlockStatus(modal);
+                        },
+                        title: 'Change user block status',
+                        message: 'Do you want to change a user block status?'
+                    }
+                }
+            }
+        });
+    }
+
+    changeBlockStatus(modal){
+        let user = {
+            id: this.user.id,
+            blocked: !this.user.blocked
+        };
+        this.ApiService.changeBlockStatus(user).then(newUser => {
+            this.user = newUser.plain();
+            modal.close();
+        })
 
     }
 

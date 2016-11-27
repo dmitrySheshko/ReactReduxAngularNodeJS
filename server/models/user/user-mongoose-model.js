@@ -36,6 +36,10 @@ let schema = new Schema({
     created: {
         type: Date,
         default: Date.now
+    },
+    blocked: {
+        type: Boolean,
+        default: false
     }
 });
 

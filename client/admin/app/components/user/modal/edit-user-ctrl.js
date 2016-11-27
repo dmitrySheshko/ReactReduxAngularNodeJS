@@ -7,8 +7,12 @@ class EditUserCtrl {
     }
 
     edit(){
-        this.isSend = true;
-        this.ApiService.editUser(this.model);
+        if(!this.isSend){
+            this.isSend = true;
+            this.ApiService.editUser(this.model).then(response => {
+                this.$uibModalInstance.close(response.plain());
+            });
+        }
     }
 
     cancel(){

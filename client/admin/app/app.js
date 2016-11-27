@@ -15,6 +15,7 @@ import UsersCtrl from './components/users/users-ctrl';
 import LoginCtrl from './components/login/login-ctrl';
 import UserCtrl from './components/user/user-ctrl';
 import EditUserCtrl from './components/user/modal/edit-user-ctrl';
+import UserAttentionCtrl from './components/user/modal/user-attention-ctrl';
 
 import StorageService from './shared/services/storage-service';
 import ApiService from './api/api';
@@ -36,6 +37,7 @@ export default angular.module('adminApp', [
     .controller('UsersCtrl', UsersCtrl)
     .controller('UserCtrl', UserCtrl)
     .controller('EditUserCtrl', EditUserCtrl)
+    .controller('UserAttentionCtrl', UserAttentionCtrl)
     .service('ApiService', ApiService)
     .service('StorageService', StorageService)
     .service('UsersService', UsersService)
