@@ -16,7 +16,7 @@ class MainMenu extends React.Component {
         this.props.actions.logout(this.props.owner.id);
     }
 
-    goToAdminPanel(){
+    static goToAdminPanel(){
         window.location.href = '/admin';
     }
 
@@ -25,7 +25,7 @@ class MainMenu extends React.Component {
             <ul className="nav navbar-nav pull-right">
                 <li><Link to="/office">{ (this.props.owner) ? this.props.owner.name : '' }</Link></li>
                 <li><a href="javascript:void(0);" onClick={ this.logout }>Logout</a></li>
-                <li>{ (this.props.owner.role === 'admin') ? <a href='javascript:void(0)' onClick={ this.goToAdminPanel }>Admin</a> : '' }</li>
+                <li>{ (this.props.owner.role === 'admin') ? <a href='javascript:void(0)' onClick={ MainMenu.goToAdminPanel }>Admin Panel</a> : '' }</li>
             </ul>
         );
 

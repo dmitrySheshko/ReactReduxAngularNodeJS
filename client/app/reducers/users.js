@@ -23,8 +23,8 @@ const reducerUsers = function(state = initialState, action){
             return { ...state, users: users };
             break;
         case '':
+            return state;
             break;
-
         default: return state;
     }
 };

@@ -6,6 +6,8 @@ import { Link, browserHistory } from 'react-router';
 import { getUsers } from '../../actions/users-actions';
 import { USERS_ON_PAGE } from '../../../common/constants/const';
 
+import UsersSearch from '../../modules/search/users-search'
+
 
 class Users extends React.Component {
 
@@ -15,6 +17,11 @@ class Users extends React.Component {
 
         this.handleSelect = this.handleSelect.bind(this);
         this.getUsers = this.getUsers.bind(this);
+        this.search = this.search.bind(this);
+
+        //this.state = {
+        //    users: this.props.users.users
+        //};
     }
 
     componentWillMount(){
@@ -24,7 +31,8 @@ class Users extends React.Component {
     initState(){
         this.state = {
             currentPage: 1,
-            pageCount: 0
+            pageCount: 0,
+            users: []
         };
     }
 
@@ -47,7 +55,6 @@ class Users extends React.Component {
         else {
             browserHistory.push('/users/' + this.state.currentPage);
         }
-
     }
 
     handleSelect(key){
@@ -60,9 +67,17 @@ class Users extends React.Component {
         return Math.ceil(this.props.users.usersCount / USERS_ON_PAGE );
     }
 
+    search(query){
+        let users = this.props.users.users.filter(user => {
+            return ~user.name.toUpperCase().indexOf(query.toUpperCase());
+        });
+
+        this.setState({users: users});
+    }
+
     render(){
 
-        const users = this.props.users.users;
+        const users = this.state.users;
 
         const pagination = (
             <Pagination
@@ -82,6 +97,7 @@ class Users extends React.Component {
 
         return (
             <div className='users-page'>
+                <UsersSearch actions={ { search: this.search } } />
                 <div className='users-table'>
                     <Table striped bordered condensed hover>
                         <thead>
