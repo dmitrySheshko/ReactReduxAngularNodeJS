@@ -31,9 +31,9 @@
             </tr>
         </table>
         <div>
-            <a href="javascript:void(0);" ng-click="user.editUser()">Edit</a>
-            <a href="javascript:void(0);" ng-click="user.deleteUser()">Delete</a>
-            <a href="javascript:void(0);" ng-click="user.blockUser()" ng-bind="!user.status ? 'Block' : 'Unblock'"></a>
+            <a class="btn btn-primary" href="javascript:void(0);" ng-click="user.editUser()">Edit</a>
+            <a class="btn btn-danger" href="javascript:void(0);" ng-click="user.deleteUser()">Delete</a>
+            <a class="btn btn-warning" href="javascript:void(0);" ng-click="user.blockUser()" ng-bind="user.getUserData().blocked ? 'Unblock' : 'Block'"></a>
         </div>
     </div>
 </div>

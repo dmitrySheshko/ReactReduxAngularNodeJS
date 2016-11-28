@@ -7,6 +7,7 @@ class UserService {
         this.user = {};
 
         this.changeBlockStatus = this.changeBlockStatus.bind(this);
+        this.deleteUserRequest = this.deleteUserRequest.bind(this);
     }
 
     getUser(){
@@ -27,7 +28,28 @@ class UserService {
     }
 
     deleteUser(){
+        let modal = this.$uibModal.open({
+            templateUrl: '/admin/templates/components/user/modal/user-attention.html',
+            controller: 'UserAttentionCtrl as attention',
+            resolve: {
+                data: () => {
+                    return {
+                        successCallback: () => {
+                            this.deleteUserRequest(modal);
+                        },
+                        title: 'Delete user',
+                        message: 'Do you want to delete the user?'
+                    }
+                }
+            }
+        });
+    }
 
+    deleteUserRequest(modal){
+        this.ApiService.deleteUser(this.user.id).then(() => {
+            modal.close();
+            this.$state.go('main.users');
+        });
     }
 
     blockUser(){
@@ -41,7 +63,7 @@ class UserService {
                             this.changeBlockStatus(modal);
                         },
                         title: 'Change user block status',
-                        message: 'Do you want to change a user block status?'
+                        message: 'Do you want to change the user block status?'
                     }
                 }
             }
@@ -56,8 +78,7 @@ class UserService {
         this.ApiService.changeBlockStatus(user).then(newUser => {
             this.user = newUser.plain();
             modal.close();
-        })
-
+        });
     }
 
 }

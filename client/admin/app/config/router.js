@@ -11,13 +11,6 @@ function Router($urlRouterProvider, $stateProvider) {
             }
         })
         .state({
-            name: 'site',
-            url: '',
-            onEnter: () => {
-                window.location.href = '/';
-            }
-        })
-        .state({
             name: 'main',
             url: '',
             abstract: true,

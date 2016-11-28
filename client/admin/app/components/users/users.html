@@ -8,7 +8,6 @@
                 <td>Name</td>
                 <td>Role</td>
                 <td>Block</td>
-                <td></td>
             </tr>
             <tr ng-repeat="user in users.getUsersList()">
                 <td ng-bind="user.number"></td>
@@ -21,10 +20,10 @@
                     <span class="btn btn-danger btn-xs" ng-if="user.blocked">Blocked</span>
                     <span class="btn btn-success btn-xs" ng-if="!user.blocked">Active</span>
                 </td>
-                <td>delete</td>
             </tr>
         </table>
         <ul
+                ng-if="usersCount > 10"
                 uib-pagination direction-links="false"
                 boundary-links="true"
                 total-items="usersCount"

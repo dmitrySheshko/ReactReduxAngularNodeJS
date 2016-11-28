@@ -30,6 +30,10 @@ class ApiService {
     changeBlockStatus(user){
         return this.rest.one('admin/users/block').customPUT({data: user});
     }
+
+    deleteUser(userId){
+        return this.rest.one('admin/users').customDELETE(userId);
+    }
 }
 ApiService.$inject = ['Restangular'];
 export default  ApiService;

@@ -4,6 +4,10 @@ export default angular.module('menu', [])
     .controller('MenuCtrl', ['UsersService', '$state', 'ApiService', function(UsersService, $state, ApiService) {
         let menu = this;
 
+        menu.goToSite = () => {
+            window.location.href = '/';
+        };
+
         menu.goToUsers = () => {
             $state.go('main.users').then(UsersService.getUsers);
         };

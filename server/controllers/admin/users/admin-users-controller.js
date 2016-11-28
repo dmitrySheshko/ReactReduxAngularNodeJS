@@ -39,6 +39,15 @@ router.put('/', (req, res, next) => {
     });
 });
 
+router.delete('/:id', (req, res, next) => {
+    User.findOneAndRemove({id: req.params.id}, (err)=> {
+        if(err) {
+            return next();
+        }
+        res.send(200);
+    });
+});
+
 router.get('/', (req, res, next) => {
     let currentPage = req.query.page;
     User.count((err, count) => {

@@ -1,12 +1,12 @@
 <div>
     <div class="modal-header">
-        <div class="title" ng-bind="attention.data.title"></div>
+        <h3 ng-bind="attention.data.title"></h3>
     </div>
     <div class="modal-body">
         <div class="message" ng-bind="attention.data.message"></div>
     </div>
     <div class="modal-footer">
-        <a href="javascript:void(0);" ng-click="attention.ok()">Yes</a>
-        <a href="javascript:void(0);" ng-click="attention.cancel()">Cancel</a>
+        <a class="btn btn-success" href="javascript:void(0);" ng-click="attention.ok()">Yes</a>
+        <a class="btn btn-default" href="javascript:void(0);" ng-click="attention.cancel()">Cancel</a>
     </div>
 </div>

@@ -61259,12 +61259,6 @@
 	            }
 	        }
 	    }).state({
-	        name: 'site',
-	        url: '',
-	        onEnter: function onEnter() {
-	            window.location.href = '/';
-	        }
-	    }).state({
 	        name: 'main',
 	        url: '',
 	        abstract: true,
@@ -61341,6 +61335,10 @@
 
 	exports.default = _angular2.default.module('menu', []).controller('MenuCtrl', ['UsersService', '$state', 'ApiService', function (UsersService, $state, ApiService) {
 	    var menu = this;
+
+	    menu.goToSite = function () {
+	        window.location.href = '/';
+	    };
 
 	    menu.goToUsers = function () {
 	        $state.go('main.users').then(UsersService.getUsers);
@@ -64613,6 +64611,11 @@
 	        value: function changeBlockStatus(user) {
 	            return this.rest.one('admin/users/block').customPUT({ data: user });
 	        }
+	    }, {
+	        key: 'deleteUser',
+	        value: function deleteUser(userId) {
+	            return this.rest.one('admin/users').customDELETE(userId);
+	        }
 	    }]);
 
 	    return ApiService;
@@ -64739,6 +64742,7 @@
 	        this.user = {};
 
 	        this.changeBlockStatus = this.changeBlockStatus.bind(this);
+	        this.deleteUserRequest = this.deleteUserRequest.bind(this);
 	    }
 
 	    _createClass(UserService, [{
@@ -64767,35 +64771,6 @@
 	    }, {
 	        key: 'deleteUser',
 	        value: function deleteUser() {
-	            /*var modalInstance = $uibModal.open({
-	             templateUrl: 'scripts/modules/other-modal/other-modal.html',
-	             controller: 'otherModalController as modal',
-	             resolve: {
-	             data: function(){
-	             return {
-	             title: 'Удаление группы',
-	             text: 'Вы действительно хотите удалить группу?',
-	             okButton: 'Удалить',
-	             cancelButton: 'Закрыть'
-	             }
-	             }
-	             }
-	             });
-	              modalInstance.result.then(function(){
-	             apiService.deleteGroup(id).then(function(){
-	             for(var i = 0; i < mainService.groups.length; i++){
-	             if(mainService.groups[i].id == id){
-	             mainService.groups[i].active = false;
-	             }
-	             }
-	             }).catch(function(error){
-	             console.log(error);
-	             });
-	             }, function(){});*/
-	        }
-	    }, {
-	        key: 'blockUser',
-	        value: function blockUser() {
 	            var _this3 = this;
 
 	            var modal = this.$uibModal.open({
@@ -64805,10 +64780,41 @@
 	                    data: function data() {
 	                        return {
 	                            successCallback: function successCallback() {
-	                                _this3.changeBlockStatus(modal);
+	                                _this3.deleteUserRequest(modal);
+	                            },
+	                            title: 'Delete user',
+	                            message: 'Do you want to delete the user?'
+	                        };
+	                    }
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'deleteUserRequest',
+	        value: function deleteUserRequest(modal) {
+	            var _this4 = this;
+
+	            this.ApiService.deleteUser(this.user.id).then(function () {
+	                modal.close();
+	                _this4.$state.go('main.users');
+	            });
+	        }
+	    }, {
+	        key: 'blockUser',
+	        value: function blockUser() {
+	            var _this5 = this;
+
+	            var modal = this.$uibModal.open({
+	                templateUrl: '/admin/templates/components/user/modal/user-attention.html',
+	                controller: 'UserAttentionCtrl as attention',
+	                resolve: {
+	                    data: function data() {
+	                        return {
+	                            successCallback: function successCallback() {
+	                                _this5.changeBlockStatus(modal);
 	                            },
 	                            title: 'Change user block status',
-	                            message: 'Do you want to change a user block status?'
+	                            message: 'Do you want to change the user block status?'
 	                        };
 	                    }
 	                }
@@ -64817,14 +64823,14 @@
 	    }, {
 	        key: 'changeBlockStatus',
 	        value: function changeBlockStatus(modal) {
-	            var _this4 = this;
+	            var _this6 = this;
 
 	            var user = {
 	                id: this.user.id,
 	                blocked: !this.user.blocked
 	            };
 	            this.ApiService.changeBlockStatus(user).then(function (newUser) {
-	                _this4.user = newUser.plain();
+	                _this6.user = newUser.plain();
 	                modal.close();
 	            });
 	        }
