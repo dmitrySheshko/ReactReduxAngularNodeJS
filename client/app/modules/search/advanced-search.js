@@ -12,6 +12,7 @@ class AdvancedSearch extends React.Component {
         this.setValue = this.setValue.bind(this);
         this.getCheckedField = this.getCheckedField.bind(this);
         this.hide = this.hide.bind(this);
+        this.search = this.search.bind(this);
     }
 
     initState(){
@@ -19,18 +20,18 @@ class AdvancedSearch extends React.Component {
             role: null,
             gender: null,
             status: null,
-            name: ''
+            name: null
         };
     }
 
     hide(){
-        this.props.hide();
+        this.props.actions.hide();
         this.setState(
             {
                 role: null,
                 gender: null,
                 status: null,
-                name: ''
+                name: null
             });
     }
 
@@ -45,7 +46,8 @@ class AdvancedSearch extends React.Component {
     }
 
     search(){
-
+        this.props.actions.advancedSearch(this.state);
+        this.hide();
     }
 
     render(){

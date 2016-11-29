@@ -22,9 +22,9 @@ export function usersChangeOnline(user){
     };
 }
 
-export function getUsers(page){
+export function getUsers(searchObj){
     return dispatch => {
-        return axios.get('/api/users', { params: { page: page } }).then(res => {
+        return axios.get('/api/users', { params: searchObj }).then(res => {
             dispatch(setUsers(res.data.users));
             dispatch(setUsersCount(res.data.usersCount));
         });

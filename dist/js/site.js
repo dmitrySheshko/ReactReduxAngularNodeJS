@@ -71149,14 +71149,23 @@
 	    };
 	}
 
-	function getUsers(page) {
+	function getUsers(searchObj) {
 	    return function (dispatch) {
-	        return _axios2.default.get('/api/users', { params: { page: page } }).then(function (res) {
+	        return _axios2.default.get('/api/users', { params: searchObj }).then(function (res) {
 	            dispatch(setUsers(res.data.users));
 	            dispatch(setUsersCount(res.data.usersCount));
 	        });
 	    };
 	}
+
+	//export function getUsers(page){
+	//    return dispatch => {
+	//        return axios.get('/api/users', { params: { page: page } }).then(res => {
+	//            dispatch(setUsers(res.data.users));
+	//            dispatch(setUsersCount(res.data.usersCount));
+	//        });
+	//    }
+	//}
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/home/user/Public/Projects/React/example1/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "users-actions.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -71313,10 +71322,8 @@
 	        _this.handleSelect = _this.handleSelect.bind(_this);
 	        _this.getUsers = _this.getUsers.bind(_this);
 	        _this.search = _this.search.bind(_this);
-
-	        //this.state = {
-	        //    users: this.props.users.users
-	        //};
+	        _this.clearAdvancedSearchData = _this.clearAdvancedSearchData.bind(_this);
+	        _this.advancedSearch = _this.advancedSearch.bind(_this);
 	        return _this;
 	    }
 
@@ -71331,7 +71338,8 @@
 	            this.state = {
 	                currentPage: 1,
 	                pageCount: 0,
-	                users: []
+	                users: [],
+	                advancedSearchData: {}
 	            };
 	        }
 	    }, {
@@ -71352,7 +71360,10 @@
 	        value: function getUsers() {
 	            var _this2 = this;
 
-	            this.props.getUsers(this.state.currentPage).then(function () {
+	            var searchObj = this.state.advancedSearchData;
+	            searchObj.page = this.state.currentPage;
+	            this.props.getUsers(searchObj).then(function () {
+	                //this.props.getUsers(this.state.currentPage).then(() => {
 	                _this2.setState({ users: _this2.props.users.users });
 	            });
 	            if (this.state.currentPage === 1) {
@@ -71385,6 +71396,16 @@
 	            this.setState({ users: users });
 	        }
 	    }, {
+	        key: 'advancedSearch',
+	        value: function advancedSearch(obj) {
+	            this.setState({ advancedSearchData: obj }, this.getUsers);
+	        }
+	    }, {
+	        key: 'clearAdvancedSearchData',
+	        value: function clearAdvancedSearchData() {
+	            this.setState({ advancedSearchData: {} });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _this4 = this;
@@ -71412,7 +71433,7 @@
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'users-page' },
-	                _react2.default.createElement(_usersSearch2.default, { actions: { search: this.search } }),
+	                _react2.default.createElement(_usersSearch2.default, { actions: { search: this.search, advancedSearch: this.advancedSearch } }),
 	                _react2.default.createElement(
 	                    'div',
 	                    { className: 'users-table' },
@@ -71570,7 +71591,7 @@
 	        value: function initState() {
 	            this.state = {
 	                showModal: false,
-	                name: ''
+	                name: null
 	            };
 	        }
 	    }, {
@@ -71602,7 +71623,7 @@
 	                    { href: 'javascript:void(0);', className: 'btn btn-info pull-right', onClick: this.show },
 	                    'Advanced search'
 	                ),
-	                _react2.default.createElement(_advancedSearch2.default, { show: this.state.showModal, hide: this.hide })
+	                _react2.default.createElement(_advancedSearch2.default, { show: this.state.showModal, actions: { hide: this.hide, advancedSearch: this.props.actions.advancedSearch } })
 	            );
 	        }
 	    }]);
@@ -71662,6 +71683,7 @@
 	        _this.setValue = _this.setValue.bind(_this);
 	        _this.getCheckedField = _this.getCheckedField.bind(_this);
 	        _this.hide = _this.hide.bind(_this);
+	        _this.search = _this.search.bind(_this);
 	        return _this;
 	    }
 
@@ -71672,18 +71694,18 @@
 	                role: null,
 	                gender: null,
 	                status: null,
-	                name: ''
+	                name: null
 	            };
 	        }
 	    }, {
 	        key: 'hide',
 	        value: function hide() {
-	            this.props.hide();
+	            this.props.actions.hide();
 	            this.setState({
 	                role: null,
 	                gender: null,
 	                status: null,
-	                name: ''
+	                name: null
 	            });
 	        }
 	    }, {
@@ -71700,7 +71722,10 @@
 	        }
 	    }, {
 	        key: 'search',
-	        value: function search() {}
+	        value: function search() {
+	            this.props.actions.advancedSearch(this.state);
+	            this.hide();
+	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {

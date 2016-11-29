@@ -27,20 +27,28 @@ router.put('/', (req, res, next) => {
 });
 
 router.get('/', (req, res, next) => {
-    let currentPage = req.query.page;
+    let searchObj = req.query;
     User.count((err, count) => {
         if(err) return next(err);
-        User.find({}, (err, users) => {
+        User.find(getQueryObject(searchObj), (err, users) => {
             if(err) return next(err);
             let usersList = getUsers(users);
             res.send({
                 usersCount: count,
                 users: usersList,
-                currentPage: currentPage
+                currentPage: searchObj.page
             });
-        }).limit(10).skip( (currentPage * 10 - 10) );
+        }).limit(10).skip( (searchObj.page * 10 - 10) );
     });
 });
+
+function getQueryObject(searchData){
+    let obj = {};
+    searchData.name ? obj.name = new RegExp(searchData.name) : null;
+    searchData.gender ? obj.gender = searchData.gender : null;
+    searchData.role ? obj.role = searchData.role : null;
+    return obj;
+}
 
 function getUsers(users){
     let onlineUsers = WsModule.users;

@@ -18,10 +18,8 @@ class Users extends React.Component {
         this.handleSelect = this.handleSelect.bind(this);
         this.getUsers = this.getUsers.bind(this);
         this.search = this.search.bind(this);
-
-        //this.state = {
-        //    users: this.props.users.users
-        //};
+        this.clearAdvancedSearchData = this.clearAdvancedSearchData.bind(this);
+        this.advancedSearch = this.advancedSearch.bind(this);
     }
 
     componentWillMount(){
@@ -32,7 +30,8 @@ class Users extends React.Component {
         this.state = {
             currentPage: 1,
             pageCount: 0,
-            users: []
+            users: [],
+            advancedSearchData: {}
         };
     }
 
@@ -48,7 +47,9 @@ class Users extends React.Component {
     }
 
     getUsers(){
-        this.props.getUsers(this.state.currentPage).then(() => {
+        let searchObj = this.state.advancedSearchData;
+        searchObj.page = this.state.currentPage;
+        this.props.getUsers(searchObj).then(() => {
             this.setState({users: this.props.users.users});
         });
         if(this.state.currentPage === 1){
@@ -77,6 +78,14 @@ class Users extends React.Component {
         this.setState({users: users});
     }
 
+    advancedSearch(obj){
+        this.setState({ advancedSearchData: obj }, this.getUsers);
+    }
+
+    clearAdvancedSearchData(){
+        this.setState({ advancedSearchData: {} });
+    }
+
     render(){
 
         const users = this.state.users;
@@ -99,7 +108,7 @@ class Users extends React.Component {
 
         return (
             <div className='users-page'>
-                <UsersSearch actions={ { search: this.search } } />
+                <UsersSearch actions={ { search: this.search, advancedSearch: this.advancedSearch } } />
                 <div className='users-table'>
                     <Table striped bordered condensed hover>
                         <thead>
