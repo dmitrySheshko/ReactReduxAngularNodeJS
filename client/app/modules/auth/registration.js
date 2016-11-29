@@ -106,8 +106,8 @@ class Registration extends React.Component {
                         </form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <a href="javascript:void(0);" className="btn btn-default" onClick={this.hide}>Close</a>
                         <a href="javascript:void(0);" className="btn btn-success" disabled={this.isLoading} onClick={this.registration}>Registration</a>
+                        <a href="javascript:void(0);" className="btn btn-default" onClick={this.hide}>Close</a>
                     </Modal.Footer>
                 </Modal>
             </li>

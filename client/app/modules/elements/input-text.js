@@ -4,7 +4,7 @@ import classnames from 'classnames';
 const InputText = ({ label, labelClass, onChange, type, name, value, error, elementWrapperClass, placeholder }) => {
     return(
         <div className={classnames('form-group', { 'has-error': error })}>
-            <label className={ classnames('control-label', labelClass) }>{ label }</label>
+            { label ? <label className={ classnames('control-label', labelClass) }>{ label }</label> : null }
             <div className={ elementWrapperClass }>
                 <input
                     type={ type }
