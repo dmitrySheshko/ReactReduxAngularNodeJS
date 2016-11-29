@@ -48,7 +48,9 @@ class Users extends React.Component {
     }
 
     getUsers(){
-        this.props.getUsers(this.state.currentPage);
+        this.props.getUsers(this.state.currentPage).then(() => {
+            this.setState({users: this.props.users.users});
+        });
         if(this.state.currentPage === 1){
             browserHistory.push('/users');
         }

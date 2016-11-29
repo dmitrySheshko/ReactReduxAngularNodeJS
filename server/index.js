@@ -23,13 +23,13 @@ let mongoStore = connectMongo(session);
 let key = fs.readFileSync('./server.key');
 let cert = fs.readFileSync('./server.crt');
 
-const compiler = webpack(webpackConfig);
-app.use(webpackMiddleware(compiler, {
-    hot: true,
-    publicPath: webpackConfig.output.publicPath,
-    noInfo: true
-}));
-app.use(webpackHotMiddleware(compiler));
+// const compiler = webpack(webpackConfig);
+// app.use(webpackMiddleware(compiler, {
+//     hot: true,
+//     publicPath: webpackConfig.output.publicPath,
+//     noInfo: true
+// }));
+// app.use(webpackHotMiddleware(compiler));
 
 app.use(bodyParser.json());
 app.use(session({
