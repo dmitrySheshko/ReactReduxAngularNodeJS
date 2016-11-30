@@ -1,4 +1,5 @@
 import express from 'express';
+import isEmpty from 'lodash/isEmpty';
 
 import User from '../../models/user/user-mongoose-model';
 import UserPublicModel from '../../models/user/user-public-model';
@@ -27,20 +28,41 @@ router.put('/', (req, res, next) => {
 });
 
 router.get('/', (req, res, next) => {
-    let searchObj = req.query;
+    let searchData = req.query;
+    let searchObj = getQueryObject(searchData);
+    if(isEmpty(searchObj)){
+        getUserList(res, next, searchData.page);
+    }
+    else {
+        getAdvancedUserList(res, next, searchObj, searchData.page);
+    }
+});
+
+function getUserList(res, next, page){
     User.count((err, count) => {
         if(err) return next(err);
-        User.find(getQueryObject(searchObj), (err, users) => {
-            if(err) return next(err);
-            let usersList = getUsers(users);
-            res.send({
-                usersCount: count,
-                users: usersList,
-                currentPage: searchObj.page
-            });
-        }).limit(10).skip( (searchObj.page * 10 - 10) );
+        findUsers(res, next, {}, page, count);
     });
-});
+}
+
+function getAdvancedUserList(res, next, searchObj, page){
+    User.find(searchObj).count((err, count) => {
+        if(err) return next(err);
+        findUsers(res, next, searchObj, page, count);
+    });
+}
+
+function findUsers(res, next, searchObj, page, count){
+    User.find(searchObj, (err, users) => {
+        if(err) return next(err);
+        let usersList = getUsers(users);
+        res.send({
+            usersCount: count,
+            users: usersList,
+            currentPage: page
+        });
+    }).limit(10).skip(page * 10 - 10);
+}
 
 function getQueryObject(searchData){
     let obj = {};

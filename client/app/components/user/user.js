@@ -144,8 +144,8 @@ class User extends React.Component {
                     </tr>
                     <tr>
                         <td colSpan='2'>
-                            <a href="javascript:void(0)" onClick={this.call}>Call</a>
-                            <a href="javascript:void(0)" onClick={this.sendMessage}>Send Message</a>
+                            <a className="btn btn-success" href="javascript:void(0)" onClick={this.call}>Call</a>
+                            <a className="btn btn-info" href="javascript:void(0)" onClick={this.sendMessage}>Send Message</a>
                         </td>
                     </tr>
                 </tbody>
