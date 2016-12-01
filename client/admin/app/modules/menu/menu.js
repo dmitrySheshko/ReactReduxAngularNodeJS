@@ -22,9 +22,7 @@ export default angular.module('menu', [])
     .directive('adminMenu', () => {
         return {
             restrict: 'E',
-            //transclude: true,
             templateUrl: '/admin/templates/modules/menu/menu.html',
-            //replace: true,
             controller: 'MenuCtrl as menu'
         }
     }).name;
