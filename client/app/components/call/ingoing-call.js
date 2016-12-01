@@ -30,10 +30,6 @@ class IngoingCall extends React.Component {
         this.setStream = this.setStream.bind(this);
     }
 
-    componentWillMount(){
-
-    }
-
     rejectCall(){
         this.sendRejectMessage();
         this.props.actions.endCall();
@@ -134,8 +130,8 @@ class IngoingCall extends React.Component {
         this.pc.createAnswer(
             this.gotAnswerLocalDescription,
             this.errorCallback,
-            {'mandatory': { 'OfferToReceiveAudio': this.props.mediaAccess.audioAccess, 'OfferToReceiveVideo': this.props.mediaAccess.videoAccess }}
-            //{'mandatory': { 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true }}
+            //{'mandatory': { 'OfferToReceiveAudio': this.props.mediaAccess.audioAccess, 'OfferToReceiveVideo': this.props.mediaAccess.videoAccess }}
+            {'mandatory': { 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true }}
         );
     }
 

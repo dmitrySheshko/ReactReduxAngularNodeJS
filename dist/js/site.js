@@ -49499,9 +49499,6 @@
 	    }
 
 	    _createClass(IngoingCall, [{
-	        key: 'componentWillMount',
-	        value: function componentWillMount() {}
-	    }, {
 	        key: 'rejectCall',
 	        value: function rejectCall() {
 	            this.sendRejectMessage();
@@ -49607,9 +49604,9 @@
 	    }, {
 	        key: 'sendAnswer',
 	        value: function sendAnswer() {
-	            this.pc.createAnswer(this.gotAnswerLocalDescription, this.errorCallback, { 'mandatory': { 'OfferToReceiveAudio': this.props.mediaAccess.audioAccess, 'OfferToReceiveVideo': this.props.mediaAccess.videoAccess } }
-	            //{'mandatory': { 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true }}
-	            );
+	            this.pc.createAnswer(this.gotAnswerLocalDescription, this.errorCallback,
+	            //{'mandatory': { 'OfferToReceiveAudio': this.props.mediaAccess.audioAccess, 'OfferToReceiveVideo': this.props.mediaAccess.videoAccess }}
+	            { 'mandatory': { 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true } });
 	        }
 	    }, {
 	        key: 'gotAnswerLocalDescription',
@@ -49848,9 +49845,9 @@
 	    }, {
 	        key: 'sendOffer',
 	        value: function sendOffer() {
-	            this.pc.createOffer(this.gotOfferLocalDescription, this.errorCallback, { 'mandatory': { 'OfferToReceiveAudio': this.props.mediaAccess.audioAccess, 'OfferToReceiveVideo': this.props.mediaAccess.videoAccess } }
-	            //{'mandatory': { 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true }}
-	            );
+	            this.pc.createOffer(this.gotOfferLocalDescription, this.errorCallback,
+	            //{'mandatory': { 'OfferToReceiveAudio': this.props.mediaAccess.audioAccess, 'OfferToReceiveVideo': this.props.mediaAccess.videoAccess }}
+	            { 'mandatory': { 'OfferToReceiveAudio': true, 'OfferToReceiveVideo': true } });
 	        }
 	    }, {
 	        key: 'gotOfferLocalDescription',
