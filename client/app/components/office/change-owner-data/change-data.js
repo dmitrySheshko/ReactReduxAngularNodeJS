@@ -71,7 +71,7 @@ class OfficeChange extends React.Component {
         const owner = this.props.owner;
         return(
             <div>
-                <a href="javascript:void(0);" onClick={ this.show }>Change</a>
+                <a className="btn btn-success" href="javascript:void(0);" onClick={ this.show }>Change</a>
                 <Modal className="static-modal" show={this.state.showModal} onHide={this.hide}>
                     <Modal.Header>
                         <Modal.Title>Change data</Modal.Title>

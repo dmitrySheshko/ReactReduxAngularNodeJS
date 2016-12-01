@@ -15,6 +15,20 @@ html, body, #app, .main-block {
 
   .page {
     margin: 20px;
+
+    .advanced-search-info {
+      padding: 15px 0;
+      & > div {
+        padding: 5px 0;
+      }
+    }
+    .social-panel {
+      overflow: hidden;
+      text-align: right;
+      a {
+        margin: 0 15px 0 0;
+      }
+    }
   }
 
   .for-footer {

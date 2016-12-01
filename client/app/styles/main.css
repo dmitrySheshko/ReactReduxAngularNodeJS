@@ -128,6 +128,15 @@ html, body, #app, .main-block {
   position: relative; }
   .page-wrapper .page {
     margin: 20px; }
+    .page-wrapper .page .advanced-search-info {
+      padding: 15px 0; }
+      .page-wrapper .page .advanced-search-info > div {
+        padding: 5px 0; }
+    .page-wrapper .page .social-panel {
+      overflow: hidden;
+      text-align: right; }
+      .page-wrapper .page .social-panel a {
+        margin: 0 15px 0 0; }
   .page-wrapper .for-footer {
     height: 50px; }
 

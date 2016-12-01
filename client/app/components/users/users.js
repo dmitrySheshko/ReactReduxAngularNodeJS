@@ -36,7 +36,7 @@ class Users extends React.Component {
             pageCount: 0,
             users: [],
             advancedSearchData: {},
-            query: null
+            query: ''
         };
     }
 
@@ -97,7 +97,7 @@ class Users extends React.Component {
 
     clearAdvancedSearch(){
         this.setState({advancedSearchData: {}}, () => {
-            this.search('');
+            this.getUsers()
         });
     }
 

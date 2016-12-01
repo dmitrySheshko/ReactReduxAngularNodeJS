@@ -93,10 +93,13 @@ class User extends React.Component {
 
     sendMessage(){
         if(!this.props.owner.id){
+            this.setState({errorMessage: 'You must registration first!'});
             this.show();
         }
         else {
-            //this.props.sendMessage();
+            if(this.checkOnline()){
+                //this.props.sendMessage();
+            }
         }
     }
 
@@ -144,8 +147,10 @@ class User extends React.Component {
                     </tr>
                     <tr>
                         <td colSpan='2'>
-                            <a className="btn btn-success" href="javascript:void(0)" onClick={this.call}>Call</a>
-                            <a className="btn btn-info" href="javascript:void(0)" onClick={this.sendMessage}>Send Message</a>
+                            <div className="social-panel">
+                                <a className="btn btn-success" href="javascript:void(0)" onClick={this.call}>Call</a>
+                                <a className="btn btn-info" href="javascript:void(0)" onClick={this.sendMessage}>Send Message</a>
+                            </div>
                         </td>
                     </tr>
                 </tbody>
