@@ -58,9 +58,31 @@ class AdvancedSearch extends React.Component {
                 </Modal.Header>
                 <Modal.Body>
                     <form className="form-horizontal">
-                        <InputText label="Name" labelClass="col-lg-4" name="name" type="text" onChange={ this.setValue } value={ this.state.name } elementWrapperClass="col-lg-8" placeholder="Name" />
-                        <InputRadio label="Role" labelClass="col-lg-4" data={[{name:'user', label: 'User'}, {name:'admin', label: 'Admin'}]} name="role" onChange={this.setValue} checked={this.getCheckedField} elementWrapperClass="col-lg-8" />
-                        <InputRadio label="Gender" labelClass="col-lg-4" data={[{name:'male', label: 'Male'}, {name:'female', label: 'Female'}]} name="gender" onChange={this.setValue} checked={this.getCheckedField} elementWrapperClass="col-lg-8" />
+                        <InputText
+                            label="Name"
+                            labelClass="col-lg-4"
+                            name="name"
+                            type="text"
+                            onChange={ this.setValue }
+                            value={ this.state.name }
+                            elementWrapperClass="col-lg-8"
+                            placeholder="Name" />
+                        <InputRadio
+                            label="Role"
+                            labelClass="col-lg-4"
+                            data={[{name:'user', label: 'User'}, {name:'admin', label: 'Admin'}]}
+                            name="role"
+                            onChange={this.setValue}
+                            checked={this.getCheckedField}
+                            elementWrapperClass="col-lg-8" />
+                        <InputRadio
+                            label="Gender"
+                            labelClass="col-lg-4"
+                            data={[{name:'male', label: 'Male'}, {name:'female', label: 'Female'}]}
+                            name="gender"
+                            onChange={this.setValue}
+                            checked={this.getCheckedField}
+                            elementWrapperClass="col-lg-8" />
                     </form>
                 </Modal.Body>
                 <Modal.Footer>

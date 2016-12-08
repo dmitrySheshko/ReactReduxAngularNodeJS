@@ -72,8 +72,23 @@ class Login extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
                         <form className="form-horizontal">
-                            <InputText label="Login" labelClass="col-lg-4" name="login" onChange={ this.setValue } value={ this.state.user.login } elementWrapperClass="col-lg-8" error={this.state.errors.login} />
-                            <InputText label="Password" labelClass="col-lg-4" name="password" type="password" onChange={ this.setValue } value={ this.state.user.password } elementWrapperClass="col-lg-8" error={this.state.errors.password} />
+                            <InputText
+                                label="Login"
+                                labelClass="col-lg-4"
+                                name="login"
+                                onChange={ this.setValue }
+                                value={ this.state.user.login }
+                                elementWrapperClass="col-lg-8"
+                                error={this.state.errors.login} />
+                            <InputText
+                                label="Password"
+                                labelClass="col-lg-4"
+                                name="password"
+                                type="password"
+                                onChange={ this.setValue }
+                                value={ this.state.user.password }
+                                elementWrapperClass="col-lg-8"
+                                error={this.state.errors.password} />
                         </form>
                     </Modal.Body>
                     <Modal.Footer>

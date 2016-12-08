@@ -96,13 +96,65 @@ class Registration extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
                         <form className="form-horizontal">
-                            <InputText label="Name" labelClass="col-lg-4" name="name" type="text" onChange={ this.setValue } value={ this.state.user.name } elementWrapperClass="col-lg-8" error={this.state.errors.name} />
-                            <InputText label="Login" labelClass="col-lg-4" name="login" type="text" onChange={ this.setValue } value={ this.state.user.login } elementWrapperClass="col-lg-8" error={this.state.errors.login} />
-                            <InputText label="Password" labelClass="col-lg-4" name="password" type="password" onChange={ this.setValue } value={ this.state.user.password } elementWrapperClass="col-lg-8" error={this.state.errors.password} />
-                            <InputText label="Password confirmation" labelClass="col-lg-4" name="passwordConfirmation" type="password" onChange={ this.setValue } value={ this.state.user.passwordConfirmation } elementWrapperClass="col-lg-8" error={this.state.errors.passwordConfirmation} />
-                            <InputRadio label="Role" labelClass="col-lg-4" data={[{name:'user', label: 'User'}, {name:'admin', label: 'Admin'}]} name="role" onChange={this.setValue} checked={this.getCheckedField} elementWrapperClass="col-lg-8" />
-                            <InputRadio label="Gender" labelClass="col-lg-4" data={[{name:'male', label: 'Male'}, {name:'female', label: 'Female'}]} name="gender" onChange={this.setValue} checked={this.getCheckedField} elementWrapperClass="col-lg-8" />
-                            <Textarea label="Description" labelClass="col-lg-4" name='description' onChange={ this.setValue } elementWrapperClass="col-lg-8" value={ this.state.user.description } />
+                            <InputText
+                                label="Name"
+                                labelClass="col-lg-4"
+                                name="name"
+                                type="text"
+                                onChange={ this.setValue }
+                                value={ this.state.user.name }
+                                elementWrapperClass="col-lg-8"
+                                error={this.state.errors.name} />
+                            <InputText
+                                label="Login"
+                                labelClass="col-lg-4"
+                                name="login"
+                                type="text"
+                                onChange={ this.setValue }
+                                value={ this.state.user.login }
+                                elementWrapperClass="col-lg-8"
+                                error={this.state.errors.login} />
+                            <InputText
+                                label="Password"
+                                labelClass="col-lg-4"
+                                name="password"
+                                type="password"
+                                onChange={ this.setValue }
+                                value={ this.state.user.password }
+                                elementWrapperClass="col-lg-8"
+                                error={this.state.errors.password} />
+                            <InputText
+                                label="Password confirmation"
+                                labelClass="col-lg-4"
+                                name="passwordConfirmation"
+                                type="password"
+                                onChange={ this.setValue }
+                                value={ this.state.user.passwordConfirmation }
+                                elementWrapperClass="col-lg-8"
+                                error={this.state.errors.passwordConfirmation} />
+                            <InputRadio
+                                label="Role"
+                                labelClass="col-lg-4"
+                                data={[{name:'user', label: 'User'}, {name:'admin', label: 'Admin'}]}
+                                name="role"
+                                onChange={this.setValue}
+                                checked={this.getCheckedField}
+                                elementWrapperClass="col-lg-8" />
+                            <InputRadio
+                                label="Gender"
+                                labelClass="col-lg-4"
+                                data={[{name:'male', label: 'Male'}, {name:'female', label: 'Female'}]}
+                                name="gender"
+                                onChange={this.setValue}
+                                checked={this.getCheckedField}
+                                elementWrapperClass="col-lg-8" />
+                            <Textarea
+                                label="Description"
+                                labelClass="col-lg-4"
+                                name='description'
+                                onChange={ this.setValue }
+                                elementWrapperClass="col-lg-8"
+                                value={ this.state.user.description } />
                         </form>
                     </Modal.Body>
                     <Modal.Footer>

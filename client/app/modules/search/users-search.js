@@ -48,7 +48,15 @@ class UsersSearch extends React.Component {
         return (
             <div>
                 <form className="navbar-form">
-                    <InputText label="" labelClass="col-lg-4" name="name" type="text" onChange={ this.search } value={ this.props.query } elementWrapperClass="form-group" placeholder="Name" />
+                    <InputText
+                        label=""
+                        labelClass="col-lg-4"
+                        name="name"
+                        type="text"
+                        onChange={ this.search }
+                        value={ this.props.query }
+                        elementWrapperClass="form-group"
+                        placeholder="Name" />
                     <a href="javascript:void(0);" className="btn btn-info pull-right" onClick={ this.show }>Advanced search</a>
                     <AdvancedSearch show={ this.state.showModal } actions={ { hide: this.hide, advancedSearch: this.props.actions.advancedSearch } } />
                     { isEmpty(this.props.advancedSearch) ? null : advancedSearch }
