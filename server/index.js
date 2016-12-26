@@ -40,31 +40,32 @@ app.use(session({
 }));
 /*-----------------------------------------------*/
 app.get('/styles/main.css', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/app/styles/main.css'));
+    res.sendFile(path.join(__dirname, '../dist/styles/main.css'));
 });
 
-app.get('/admin/styles/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/admin/styles/' + req.params[0]));
+app.get('/admin/styles/main.css', (req, res) => {
+    res.sendFile(path.join(__dirname, '../dist/styles/admin-main.css'));
 });
 /*-----------------------------------------------*/
 app.get('/admin/templates/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/admin/app/' + req.params[0]));
+    res.sendFile(path.join(__dirname, '../dist/admin/app/' + req.params[0]));
 });
 app.get('/js/*', (req, res) => {
     res.sendFile(path.join(__dirname, '../dist/js/' + req.params[0]));
 });
 
 app.get(['/admin', '/admin/*'], (req, res) => {
-    res.sendFile(path.join(__dirname, '../dist/admin.html'));
+    res.sendFile(path.join(__dirname, '../dist/admin/admin.html'));
 });
 
 app.use('/api', apiController);
 
 app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../dist/site.html'));
+    res.sendFile(path.join(__dirname, '../dist/app/site.html'));
 });
 
 mongoose.connection.on('open', () => console.log('Connect to DB'));
+
 let server = https.createServer(
     {
         key: key,

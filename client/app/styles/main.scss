@@ -1,8 +1,8 @@
-@import "vars";
+@import "vars.scss";
 
-@import 'call';
-@import 'users';
-@import 'office';
+@import 'call.scss';
+@import 'users.scss';
+@import 'office.scss';
 
 html, body, #app, .main-block {
   height: 100%;
