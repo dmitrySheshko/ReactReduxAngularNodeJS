@@ -15,8 +15,8 @@
   "keywords": [
     "React"
   ],
-  "author": "Dmitry Sheshko",
-  "license": "BSD-2-Clause",
+  "author": "Dmitry Sheshko, dm.sheshko@gmail.ru",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/dmitrySheshko/ReactExampleSite/issues"
   },
