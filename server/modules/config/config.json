@@ -1,7 +1,7 @@
 {
   "port": 3000,
   "mongoose":{
-    "uri": "mongodb://localhost/site"
+    "uri": "mongodb://site:123456@localhost/site"
   },
   "session":{
     "secret": "secret",

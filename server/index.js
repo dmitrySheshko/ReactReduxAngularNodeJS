@@ -9,10 +9,10 @@ import https from 'https';
 import ws from 'ws';
 import fs from 'fs';
 
-import webpack from 'webpack';
+/*import webpack from 'webpack';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import webpackConfig from '../webpack.config';
+import webpackConfig from '../webpack.config';*/
 
 import apiController from './controllers/api-controller';
 import wsModule from './modules/ws/ws-module';
